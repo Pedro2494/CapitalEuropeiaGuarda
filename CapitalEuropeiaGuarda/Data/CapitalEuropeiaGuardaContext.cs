@@ -15,5 +15,7 @@ namespace CapitalEuropeiaGuarda.Data
         }
 
         public DbSet<CapitalEuropeiaGuarda.Models.aluguercarros> aluguercarros { get; set; }
+
+        public DbSet<CapitalEuropeiaGuarda.Models.Hoteis> Hoteis { get; set; }
     }
 }
