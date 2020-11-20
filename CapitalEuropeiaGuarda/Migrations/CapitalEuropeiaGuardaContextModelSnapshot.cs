@@ -21,65 +21,66 @@ namespace CapitalEuropeiaGuarda.Migrations
 
             modelBuilder.Entity("CapitalEuropeiaGuarda.Models.Hoteis", b =>
                 {
-                    b.Property<int>("HoteisId")
+                    b.Property<int>("HoteisId");
 
-            modelBuilder.Entity("CapitalEuropeiaGuarda.Models.PontoInteresse", b =>
-                {
-                    b.Property<int>("PontoInteresseId")
+                    modelBuilder.Entity("CapitalEuropeiaGuarda.Models.PontoInteresse", b =>
+                        {
+                            b.Property<int>("PontoInteresseId")
 
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                                .ValueGeneratedOnAdd()
+                                .HasColumnType("int")
+                                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("DescricaoCurta")
-                        .HasColumnType("nvarchar(max)");
-
-
-                    b.Property<string>("HotelUrl")
-                        .HasColumnType("nvarchar(max)");
+                            b.Property<string>("DescricaoCurta")
+                                .HasColumnType("nvarchar(max)");
 
 
-                    b.Property<string>("Local")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Nome")
-                        .HasColumnType("nvarchar(max)");
+                            b.Property<string>("HotelUrl")
+                                .HasColumnType("nvarchar(max)");
 
 
-                    b.HasKey("HoteisId");
+                            b.Property<string>("Local")
+                                .HasColumnType("nvarchar(max)");
 
-                    b.ToTable("Hoteis");
+                            b.Property<string>("Nome")
+                                .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("PontoInteresseId");
 
-                    b.ToTable("PontoInteresse");
+                            b.HasKey("HoteisId");
 
-                });
+                            b.ToTable("Hoteis");
 
-            modelBuilder.Entity("CapitalEuropeiaGuarda.Models.aluguercarros", b =>
-                {
-                    b.Property<int>("aluguercarrosId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                            b.HasKey("PontoInteresseId");
 
-                    b.Property<string>("LinkReserva")
-                        .HasColumnType("nvarchar(max)");
+                            b.ToTable("PontoInteresse");
 
-                    b.Property<int>("Lugares")
-                        .HasColumnType("int");
+                        });
 
-                    b.Property<string>("Marca")
-                        .HasColumnType("nvarchar(max)");
+                    modelBuilder.Entity("CapitalEuropeiaGuarda.Models.aluguercarros", b =>
+                        {
+                            b.Property<int>("aluguercarrosId")
+                                .ValueGeneratedOnAdd()
+                                .HasColumnType("int")
+                                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Modelo")
-                        .HasColumnType("nvarchar(max)");
+                            b.Property<string>("LinkReserva")
+                                .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("aluguercarrosId");
+                            b.Property<int>("Lugares")
+                                .HasColumnType("int");
 
-                    b.ToTable("aluguercarros");
-                });
+                            b.Property<string>("Marca")
+                                .HasColumnType("nvarchar(max)");
+
+                            b.Property<string>("Modelo")
+                                .HasColumnType("nvarchar(max)");
+
+                            b.HasKey("aluguercarrosId");
+
+                            b.ToTable("aluguercarros");
+                        });
 #pragma warning restore 612, 618
+                });
         }
     }
 }
