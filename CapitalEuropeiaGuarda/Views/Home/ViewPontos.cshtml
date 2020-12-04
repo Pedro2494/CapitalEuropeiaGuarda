@@ -1,7 +1,6 @@
 ﻿@{
     ViewData["Title"] = "Pontos de Interesse";
-    string[] TableHeaders = new string[] {"Id"
-          ,"Nome"
+    string[] TableHeaders = new string[] {"Nome"
           ,"Local"
           ,"Descricao Curta"};
 }
@@ -33,7 +32,6 @@
                     foreach (var Data in Model)
                     {
                         <tr>
-                            <td>@Data.PontoInteresseId </td>
                             <td>@Data.Nome </td>
                             <td>@Data.Local </td>
                             <td>@Data.DescricaoCurta </td>

@@ -62,7 +62,7 @@ namespace CapitalEuropeiaGuarda.Controllers
             {
                 con.Open();
                 com.Connection = con;
-                com.CommandText = "SELECT TOP (1000) [PontoInteresseId],[Nome],[Local],[DescricaoCurta]FROM[CapitalEuropeiaGuardaContext - 72c4669e - 817d - 4406 - 991a - a042364a82b4].[dbo].[PontoInteresse]";
+                com.CommandText = "SELECT TOP (1000) [PontoInteresseId],[Nome],[Local],[DescricaoCurta] FROM [PontoInteresse]";
                 dr = com.ExecuteReader();
                 while (dr.Read())
                 {
