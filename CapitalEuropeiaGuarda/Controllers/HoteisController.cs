@@ -37,6 +37,7 @@ namespace CapitalEuropeiaGuarda.Controllers
                 .FirstOrDefaultAsync(m => m.HoteisId == id);
             if (hoteis == null)
             {
+                // todo: Maybe someone delete it. Show appropriate message
                 return NotFound();
             }
 
@@ -58,10 +59,20 @@ namespace CapitalEuropeiaGuarda.Controllers
         {
             if (ModelState.IsValid)
             {
+                // todo: additional validations
+
                 _context.Add(hoteis);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+
+
+                ViewBag.title = "Hotel adicionado com sucesso";
+                ViewBag.type = "alert-sucess";
+                ViewBag.redirect = "/"; //vai para pagInicial
+
+                // todo: inform the user that the author was successfully created              
+               return View("Confirmacao");
             }
+            
             return View(hoteis);
         }
 
@@ -76,6 +87,7 @@ namespace CapitalEuropeiaGuarda.Controllers
             var hoteis = await _context.Hoteis.FindAsync(id);
             if (hoteis == null)
             {
+                // todo: Maybe someone delete it. Show appropriate message
                 return NotFound();
             }
             return View(hoteis);
@@ -104,13 +116,17 @@ namespace CapitalEuropeiaGuarda.Controllers
                 {
                     if (!HoteisExists(hoteis.HoteisId))
                     {
+                        // todo: Maybe someone delete it. 
+                        // Inform user and allow to insert new with same data
                         return NotFound();
                     }
                     else
                     {
+                        // todo: show error and allow to try again
                         throw;
                     }
                 }
+                // todo: inform the user that the author was successfully edited
                 return RedirectToAction(nameof(Index));
             }
             return View(hoteis);
@@ -128,6 +144,7 @@ namespace CapitalEuropeiaGuarda.Controllers
                 .FirstOrDefaultAsync(m => m.HoteisId == id);
             if (hoteis == null)
             {
+                // todo: Maybe someone delete it. Inform the user.
                 return NotFound();
             }
 
@@ -142,6 +159,7 @@ namespace CapitalEuropeiaGuarda.Controllers
             var hoteis = await _context.Hoteis.FindAsync(id);
             _context.Hoteis.Remove(hoteis);
             await _context.SaveChangesAsync();
+            // todo: inform the user that the author was successfully deleted
             return RedirectToAction(nameof(Index));
         }
 
