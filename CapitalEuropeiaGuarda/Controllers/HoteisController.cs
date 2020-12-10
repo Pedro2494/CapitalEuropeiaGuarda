@@ -126,8 +126,11 @@ namespace CapitalEuropeiaGuarda.Controllers
                         throw;
                     }
                 }
+                ViewBag.title = "Hotel editado com sucesso";
+                ViewBag.type = "alert-sucess";
+                ViewBag.redirect = "/"; //vai para pagInicial
                 // todo: inform the user that the author was successfully edited
-                return RedirectToAction(nameof(Index));
+                return View("editado");
             }
             return View(hoteis);
         }
