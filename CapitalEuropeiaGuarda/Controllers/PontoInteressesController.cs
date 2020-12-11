@@ -23,6 +23,7 @@ namespace CapitalEuropeiaGuarda.Controllers
         public async Task<IActionResult> Index()
         {
             return View(await _context.PontoInteresse.ToListAsync());
+
         }
 
         // GET: PontoInteresses/Details/5
@@ -142,6 +143,7 @@ namespace CapitalEuropeiaGuarda.Controllers
             var pontoInteresse = await _context.PontoInteresse.FindAsync(id);
             _context.PontoInteresse.Remove(pontoInteresse);
             await _context.SaveChangesAsync();
+            TempData["Success"] = "Added Successfully!";
             return RedirectToAction(nameof(Index));
         }
 
