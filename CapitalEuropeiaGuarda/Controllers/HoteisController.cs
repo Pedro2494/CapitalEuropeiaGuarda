@@ -147,6 +147,8 @@ namespace CapitalEuropeiaGuarda.Controllers
                 .FirstOrDefaultAsync(m => m.HoteisId == id);
             if (hoteis == null)
             {
+                
+                
                 // todo: Maybe someone delete it. Inform the user.
                 return NotFound();
             }
@@ -162,6 +164,9 @@ namespace CapitalEuropeiaGuarda.Controllers
             var hoteis = await _context.Hoteis.FindAsync(id);
             _context.Hoteis.Remove(hoteis);
             await _context.SaveChangesAsync();
+
+
+            
             // todo: inform the user that the author was successfully deleted
             return RedirectToAction(nameof(Index));
         }
