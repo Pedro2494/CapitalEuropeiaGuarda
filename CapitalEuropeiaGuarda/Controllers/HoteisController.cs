@@ -67,7 +67,7 @@ namespace CapitalEuropeiaGuarda.Controllers
 
                 ViewBag.title = "Hotel adicionado com sucesso";
                 ViewBag.type = "alert-sucess";
-                ViewBag.redirect = "/"; //vai para pagInicial
+                ViewBag.redirect = "/hoteis/Index"; //vai para pagInicial
 
                 // todo: inform the user that the author was successfully created              
                return View("Confirmacao");
@@ -87,8 +87,12 @@ namespace CapitalEuropeiaGuarda.Controllers
             var hoteis = await _context.Hoteis.FindAsync(id);
             if (hoteis == null)
             {
+
+                ViewBag.title = "Este hotel já foi eliminado";
+                ViewBag.type = "alert-sucess";
+                ViewBag.redirect = "/hoteis/Index";
                 // todo: Maybe someone delete it. Show appropriate message
-                return NotFound();
+                return View("infoEliminado");
             }
             return View(hoteis);
         }
@@ -128,7 +132,7 @@ namespace CapitalEuropeiaGuarda.Controllers
                 }
                 ViewBag.title = "Hotel editado com sucesso";
                 ViewBag.type = "alert-sucess";
-                ViewBag.redirect = "/"; //vai para pagInicial
+                ViewBag.redirect = "/hoteis/Index"; //vai para pagInicial
                 // todo: inform the user that the author was successfully edited
                 return View("editado");
             }
@@ -147,10 +151,12 @@ namespace CapitalEuropeiaGuarda.Controllers
                 .FirstOrDefaultAsync(m => m.HoteisId == id);
             if (hoteis == null)
             {
-                
-                
+
+                ViewBag.title = "Este hotel já foi eliminado";
+                ViewBag.type = "alert-sucess";
+                ViewBag.redirect = "/hoteis/Index";
                 // todo: Maybe someone delete it. Inform the user.
-                return NotFound();
+                return View("infoEliminado");
             }
 
             return View(hoteis);
@@ -166,9 +172,11 @@ namespace CapitalEuropeiaGuarda.Controllers
             await _context.SaveChangesAsync();
 
 
-            
+            ViewBag.title = "Hotel eliminado com sucesso";
+            ViewBag.type = "alert-sucess";
+            ViewBag.redirect = "/hoteis/Index"; //vai para pagInicial
             // todo: inform the user that the author was successfully deleted
-            return RedirectToAction(nameof(Index));
+            return View("eliminado");
         }
 
         private bool HoteisExists(int id)
