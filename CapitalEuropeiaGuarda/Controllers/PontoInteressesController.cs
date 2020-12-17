@@ -61,7 +61,14 @@ namespace CapitalEuropeiaGuarda.Controllers
             {
                 _context.Add(pontoInteresse);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                //return RedirectToAction(nameof(Index));
+
+                ViewBag.title = "Hotel adicionado com sucesso";
+                ViewBag.type = "alert-sucess";
+                ViewBag.redirect = "/pontoInteresses/Index"; //vai para pagInicial
+
+                // todo: inform the user that the author was successfully created              
+                return View("ConfirmaInserir");
             }
             return View(pontoInteresse);
         }

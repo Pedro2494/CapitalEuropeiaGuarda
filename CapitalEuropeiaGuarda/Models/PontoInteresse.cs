@@ -19,9 +19,5 @@ namespace CapitalEuropeiaGuarda.Models
 
         [Required(ErrorMessage = "Insira uma Descrição")]
         public String DescricaoCurta { get; set; }
-
-
-
-
     }
 }
