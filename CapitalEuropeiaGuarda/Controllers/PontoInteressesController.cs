@@ -63,9 +63,10 @@ namespace CapitalEuropeiaGuarda.Controllers
                 await _context.SaveChangesAsync();
                 //return RedirectToAction(nameof(Index));
 
-                ViewBag.title = "Hotel adicionado com sucesso";
+                ViewBag.message = "Ponto de Interesse adicionado com sucesso!";
                 ViewBag.type = "alert-sucess";
-                ViewBag.redirect = "/pontoInteresses/Index"; //vai para pagInicial
+                //Volta para a página de Pontos de Interesse
+                ViewBag.redirect = "/pontoInteresses/Index"; 
 
                 // todo: inform the user that the author was successfully created              
                 return View("ConfirmaInserir");
@@ -119,7 +120,12 @@ namespace CapitalEuropeiaGuarda.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                ViewBag.message = "Ponto de Interesse alterado com sucesso!";
+                ViewBag.type = "alert-sucess";
+                // Volta para a página de Pontos de Interesse
+                ViewBag.redirect = "/pontoInteresses/Index"; 
+                // todo: inform the user that the author was successfully edited
+                return View("ConfirmaEditar");
             }
             return View(pontoInteresse);
         }
@@ -150,8 +156,13 @@ namespace CapitalEuropeiaGuarda.Controllers
             var pontoInteresse = await _context.PontoInteresse.FindAsync(id);
             _context.PontoInteresse.Remove(pontoInteresse);
             await _context.SaveChangesAsync();
-            TempData["Success"] = "Added Successfully!";
-            return RedirectToAction(nameof(Index));
+            
+
+            ViewBag.message = "Ponto de Interesse eliminado!";
+            ViewBag.type = "alert-sucess";
+            ViewBag.redirect = "/pontoInteresses/Index"; //vai para pagInicial
+            // todo: inform the user that the author was successfully deleted
+            return View("ConfirmaEliminar");
         }
 
         private bool PontoInteresseExists(int id)
