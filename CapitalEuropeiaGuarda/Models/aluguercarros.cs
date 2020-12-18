@@ -14,7 +14,7 @@ namespace CapitalEuropeiaGuarda.Models
         [Required(ErrorMessage = "Por favor, introduza a marca do carro")]
         public String Marca { get; set; }
 
-
+        [Required(ErrorMessage = "Por favor, introduza o modelo do carro")]
         public String Modelo { get; set; }
 
         
