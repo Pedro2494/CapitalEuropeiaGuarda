@@ -172,7 +172,7 @@ namespace CapitalEuropeiaGuarda.Controllers
             }
             ViewBag.title = "Carro eliminado com sucesso";
             ViewBag.type = "alert-sucess";
-            ViewBag.redirect = "/hoteis/Index";
+            ViewBag.redirect = "/aluguercarros/Index";
             // todo: inform the user that the author was successfully deleted
             return View("eliminado");
 
