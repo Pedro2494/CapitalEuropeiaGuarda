@@ -1,0 +1,44 @@
+﻿@{
+    ViewData["Title"] = "Pontos de Interesse";
+    string[] TableHeaders = new string[] {"Nome"
+          ,"Local"
+          ,"Descricao Curta"};
+}
+<br />
+<br />
+
+<h1>@ViewData["Title"]</h1>
+
+<div class="table">
+    <table>
+        <thead>
+            <tr>
+                @{
+                    foreach (var head in TableHeaders)
+                    {
+                        <th>
+                            @head
+                        </th>
+                    }
+                }
+            </tr>
+        </thead>
+       
+        <tbody>
+            @{
+                if (Model != null)
+                {
+
+                    foreach (var Data in Model)
+                    {
+                        <tr>
+                            <td>@Data.Nome </td>
+                            <td>@Data.Local </td>
+                            <td>@Data.DescricaoCurta </td>
+                        </tr>
+                    }
+                }
+            }
+        </tbody>
+    </table>
+</div>
