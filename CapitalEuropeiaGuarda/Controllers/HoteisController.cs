@@ -37,6 +37,7 @@ namespace CapitalEuropeiaGuarda.Controllers
                 .FirstOrDefaultAsync(m => m.HoteisId == id);
             if (hoteis == null)
             {
+                // todo: Maybe someone delete it. Show appropriate message
                 return NotFound();
             }
 
@@ -58,10 +59,20 @@ namespace CapitalEuropeiaGuarda.Controllers
         {
             if (ModelState.IsValid)
             {
+                // todo: additional validations
+
                 _context.Add(hoteis);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+
+
+                ViewBag.title = "Hotel adicionado com sucesso";
+                ViewBag.type = "alert-sucess";
+                ViewBag.redirect = "/hoteis/Index"; //vai para pagInicial
+
+                // todo: inform the user that the author was successfully created              
+               return View("Confirmacao");
             }
+            
             return View(hoteis);
         }
 
@@ -76,7 +87,12 @@ namespace CapitalEuropeiaGuarda.Controllers
             var hoteis = await _context.Hoteis.FindAsync(id);
             if (hoteis == null)
             {
-                return NotFound();
+
+                ViewBag.title = "Este hotel já foi eliminado";
+                ViewBag.type = "alert-sucess";
+                ViewBag.redirect = "/hoteis/Index";
+                // todo: Maybe someone delete it. Show appropriate message
+                return View("infoEliminado");
             }
             return View(hoteis);
         }
@@ -104,14 +120,21 @@ namespace CapitalEuropeiaGuarda.Controllers
                 {
                     if (!HoteisExists(hoteis.HoteisId))
                     {
+                        // todo: Maybe someone delete it. 
+                        // Inform user and allow to insert new with same data
                         return NotFound();
                     }
                     else
                     {
+                        // todo: show error and allow to try again
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                ViewBag.title = "Hotel editado com sucesso";
+                ViewBag.type = "alert-sucess";
+                ViewBag.redirect = "/hoteis/Index"; //vai para pagInicial
+                // todo: inform the user that the author was successfully edited
+                return View("editado");
             }
             return View(hoteis);
         }
@@ -128,7 +151,12 @@ namespace CapitalEuropeiaGuarda.Controllers
                 .FirstOrDefaultAsync(m => m.HoteisId == id);
             if (hoteis == null)
             {
-                return NotFound();
+
+                ViewBag.title = "Este hotel já foi eliminado";
+                ViewBag.type = "alert-sucess";
+                ViewBag.redirect = "/hoteis/Index";
+                // todo: Maybe someone delete it. Inform the user.
+                return View("infoEliminado");
             }
 
             return View(hoteis);
@@ -142,12 +170,41 @@ namespace CapitalEuropeiaGuarda.Controllers
             var hoteis = await _context.Hoteis.FindAsync(id);
             _context.Hoteis.Remove(hoteis);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+
+
+            ViewBag.title = "Hotel eliminado com sucesso";
+            ViewBag.type = "alert-sucess";
+            ViewBag.redirect = "/hoteis/Index"; //vai para pagInicial
+            // todo: inform the user that the author was successfully deleted
+            return View("eliminado");
         }
 
         private bool HoteisExists(int id)
         {
             return _context.Hoteis.Any(e => e.HoteisId == id);
         }
+
+        //aqui
+        //public IActionResult Index(int page = 1)
+        //{
+        //   var pagination = new PagingInfo
+        //    {
+        //        CurrentPage = page,
+        //        PageSize = PagingInfo.DEFAULT_PAGE_SIZE,
+        //        TotalItems = repository.Products.Count()
+        //    }; 
+
+        //    return View(
+        //        new HoteisListViewModel
+        //        {
+        //            Products = repository.Products
+        //                .OrderBy(p => p.Price)
+        //                .Skip((page - 1) * pagination.PageSize)
+        //                .Take(pagination.PageSize),
+        //            Pagination = pagination
+        //        }
+        //    );
+        //}
+
     }
 }

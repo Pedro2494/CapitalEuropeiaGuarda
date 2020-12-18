@@ -61,7 +61,7 @@ namespace CapitalEuropeiaGuarda.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Data Source=&quot;(localdb)\MSSQLLocalDB&quot;; database=&quot;CapitalEuropeiaGuardaContext-72c4669e-817d-4406-991a-a042364a82b4&quot;; integrated security =SSPI;.
+        ///   Looks up a localized string similar to Data Source=&quot;(localdb)\MSSQLLocalDB&quot;;database=&quot;CapitalEuropeiaGuardaContext-72c4669e-817d-4406-991a-a042364a82b4&quot;;integrated security = SSPI.
         /// </summary>
         internal static string ConnectionString {
             get {
