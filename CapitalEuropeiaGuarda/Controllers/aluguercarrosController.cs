@@ -13,6 +13,7 @@ namespace CapitalEuropeiaGuarda.Controllers
     public class aluguercarrosController : Controller
     {
         private readonly CapitalEuropeiaGuardaContext _context;
+        
 
         public aluguercarrosController(CapitalEuropeiaGuardaContext context)
         {
@@ -35,13 +36,18 @@ namespace CapitalEuropeiaGuarda.Controllers
 
             var aluguercarros = await _context.aluguercarros
                 .FirstOrDefaultAsync(m => m.aluguercarrosId == id);
+            
             if (aluguercarros == null)
             {
                 return NotFound();
+                // todo: Maybe someone delete it. Show appropriate message
             }
+            
 
             return View(aluguercarros);
         }
+
+        
 
         // GET: aluguercarros/Create
         public IActionResult Create()
@@ -58,9 +64,18 @@ namespace CapitalEuropeiaGuarda.Controllers
         {
             if (ModelState.IsValid)
             {
+                // todo: additional validations
                 _context.Add(aluguercarros);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+
+                ViewBag.title = "Carro adicionado com sucesso";
+                ViewBag.type = "alert-sucess";
+                ViewBag.redirect = "/aluguercarros/Index"; //vai para pagInicial
+                // todo: inform the user that the author was successfully created
+                
+                return View("Criado");
+
+
             }
             return View(aluguercarros);
         }
@@ -76,6 +91,7 @@ namespace CapitalEuropeiaGuarda.Controllers
             var aluguercarros = await _context.aluguercarros.FindAsync(id);
             if (aluguercarros == null)
             {
+                // todo: Maybe someone delete it. Show appropriate message
                 return NotFound();
             }
             return View(aluguercarros);
@@ -104,14 +120,22 @@ namespace CapitalEuropeiaGuarda.Controllers
                 {
                     if (!aluguercarrosExists(aluguercarros.aluguercarrosId))
                     {
+                        // todo: Maybe someone delete it. 
+                        // Inform user and allow to insert new with same data
                         return NotFound();
                     }
                     else
                     {
+                        // todo: show error and allow to try again
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                ViewBag.title = "Carro editado com sucesso";
+                ViewBag.type = "alert-sucess";
+                ViewBag.redirect = "/aluguercarros/Index"; //vai para pagInicial
+                // todo: inform the user that the author was successfully edited
+                return View("editado");
+
             }
             return View(aluguercarros);
         }
@@ -128,6 +152,7 @@ namespace CapitalEuropeiaGuarda.Controllers
                 .FirstOrDefaultAsync(m => m.aluguercarrosId == id);
             if (aluguercarros == null)
             {
+                // todo: Maybe someone delete it. Inform the user.
                 return NotFound();
             }
 
@@ -140,9 +165,17 @@ namespace CapitalEuropeiaGuarda.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var aluguercarros = await _context.aluguercarros.FindAsync(id);
-            _context.aluguercarros.Remove(aluguercarros);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            
+            if (aluguercarros != null) {
+                _context.aluguercarros.Remove(aluguercarros);
+                await _context.SaveChangesAsync();
+            }
+            ViewBag.title = "Carro eliminado com sucesso";
+            ViewBag.type = "alert-sucess";
+            ViewBag.redirect = "/hoteis/Index";
+            // todo: inform the user that the author was successfully deleted
+            return View("eliminado");
+
         }
 
         private bool aluguercarrosExists(int id)
