@@ -184,27 +184,5 @@ namespace CapitalEuropeiaGuarda.Controllers
             return _context.Hoteis.Any(e => e.HoteisId == id);
         }
 
-        //aqui
-        //public IActionResult Index(int page = 1)
-        //{
-        //   var pagination = new PagingInfo
-        //    {
-        //        CurrentPage = page,
-        //        PageSize = PagingInfo.DEFAULT_PAGE_SIZE,
-        //        TotalItems = repository.Products.Count()
-        //    }; 
-
-        //    return View(
-        //        new HoteisListViewModel
-        //        {
-        //            Products = repository.Products
-        //                .OrderBy(p => p.Price)
-        //                .Skip((page - 1) * pagination.PageSize)
-        //                .Take(pagination.PageSize),
-        //            Pagination = pagination
-        //        }
-        //    );
-        //}
-
     }
 }
