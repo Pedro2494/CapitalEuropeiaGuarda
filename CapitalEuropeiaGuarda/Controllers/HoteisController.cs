@@ -20,8 +20,16 @@ namespace CapitalEuropeiaGuarda.Controllers
         }
 
         // GET: Hoteis
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int page = 1)
         {
+            var pagination = new PagingInfo
+            {
+                CurrentPage = page,
+                PageSize = PagingInfo.DEFAULT_PAGE_SIZE,
+                TotalItems = _context.Hoteis.Count()
+            };
+
+         
             return View(await _context.Hoteis.ToListAsync());
         }
 
