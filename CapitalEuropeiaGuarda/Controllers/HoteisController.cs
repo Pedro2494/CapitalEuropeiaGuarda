@@ -28,9 +28,15 @@ namespace CapitalEuropeiaGuarda.Controllers
                 PageSize = PagingInfo.DEFAULT_PAGE_SIZE,
                 TotalItems = _context.Hoteis.Count()
             };
-
-         
-            return View(await _context.Hoteis.ToListAsync());
+            return View(
+                new HotelListViewModel
+                {
+                    hotel = _context.Hoteis
+                    .Skip((page - 1) * pagination.PageSize),
+                    Pagination = pagination
+                }
+                );
+            // return View(await _context.Hoteis.ToListAsync());
         }
 
         // GET: Hoteis/Details/5
