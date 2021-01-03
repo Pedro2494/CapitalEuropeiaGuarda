@@ -7,12 +7,20 @@
     <title>@ViewData["Title"] - Stay in Guarda</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+
+    <link rel="stylesheet" href="css/demo.css">
+    <link rel="stylesheet" href="css/footer-distributed-with-address-and-phones.css">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+
+    <link href="https://fonts.googleapis.com/css?family=Cookie" rel="stylesheet" type="text/css">
+
 </head>
 <body>
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
             <div class="container">
-                <a class="navbar-brand" asp-controller="Home" asp-action="Index" >Stay in Guarda</a>
+                <a class="navbar-brand" asp-controller="Home" asp-action="Index">Stay in Guarda</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -45,9 +53,29 @@
     <footer class="py-5 bg-dark">
         <div class="container">
             <p class="m-0 text-center text-white">Copyright &copy; StayinGuarda 2020</p>
+
+            <div class="footer-center">
+
+                <div>
+                    <i class="fa fa-map-marker text-white"></i>
+                    <p class="text-white"><span>Av. Dr. Francisco Sá Carneiro</span> Guarda, Portugal</p>
+                </div>
+
+                <div>
+                    <i class="fa fa-phone text-white"></i>
+                    <p class="text-white">960000000</p>
+                </div>
+
+                <div>
+                    <i class="fa fa-envelope text-white"></i>
+                    <p class="text-white"><a href="/cdn-cgi/l/email-protection#4c3f393c3c233e380c2f23213c2d2235622f2321"><span class="__cf_email__" data-cfemail="7a090f0a0a15080e3a1915170a1b140354191517">email</span></a></p>
+                </div>
+
+            </div>
+
         </div>
-       
     </footer>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
