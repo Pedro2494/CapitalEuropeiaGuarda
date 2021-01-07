@@ -21,9 +21,22 @@ namespace CapitalEuropeiaGuarda.Controllers
         }
 
         // GET: aluguercarros
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int page = 1)
         {
-            return View(await _context.aluguercarros.ToListAsync());
+            var pagination = new PagingInfo
+            {
+                CurrentPage = page,
+                PageSize = PagingInfo.DEFAULT_PAGE_SIZE,
+                TotalItems = _context.aluguercarros.Count()
+            };
+            return View(new aluguercarrosListViewModel
+            {
+                aluguercarros = _context.aluguercarros
+                .Skip((page -1) * pagination.PageSize),
+                Pagination = pagination
+            }
+            );
+            //return View(await _context.aluguercarros.ToListAsync());
         }
 
         // GET: aluguercarros/Details/5
@@ -182,5 +195,7 @@ namespace CapitalEuropeiaGuarda.Controllers
         {
             return _context.aluguercarros.Any(e => e.aluguercarrosId == id);
         }
+
+        
     }
 }

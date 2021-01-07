@@ -8,6 +8,7 @@ namespace CapitalEuropeiaGuarda.Models
     public class Empresaaluguer
 
     {
+        
         public int empresaaluguerId { get; set; }
 
         public string NomeEmpresa { get; set; }

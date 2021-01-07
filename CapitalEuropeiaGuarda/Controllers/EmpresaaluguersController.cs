@@ -150,4 +150,6 @@ namespace CapitalEuropeiaGuarda.Controllers
             return _context.Empresaaluguer.Any(e => e.empresaaluguerId == id);
         }
     }
+
+    
 }
