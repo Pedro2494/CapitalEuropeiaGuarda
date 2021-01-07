@@ -21,5 +21,7 @@ namespace CapitalEuropeiaGuarda.Models
 
         [Required(ErrorMessage = "Introduza um local")]
         public string Local { get; set; }
+
+        public ICollection<PontoInteressePorHotel> PontoInteressePorHoteis { get; set; }
     }
 }
