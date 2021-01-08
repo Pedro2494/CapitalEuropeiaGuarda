@@ -1,5 +1,4 @@
-﻿@*@@model IEnumerable<CapitalEuropeiaGuarda.Models.aluguercarros>*@
-@model IEnumerable<CapitalEuropeiaGuarda.Models.aluguercarrosListViewModel>
+﻿@model IEnumerable<CapitalEuropeiaGuarda.Models.aluguercarros>
 @{
     ViewData["Title"] = "Index";
 }
@@ -52,7 +51,7 @@
     </tbody>
 </table>
 
-<nav class="mt-3">
+@*<nav class="mt-3">
     <ul class="pagination">
         <li class="page-item"><a class="page-link" asp-action="Index" asp-route-page="1">First</a></li>
 
@@ -78,4 +77,4 @@
         }
         <li class="page-item"><a class="page-link" asp-action="Index" asp-route-page="@Model.Pagination.TotalPages">Last></a></li>
     </ul>
-</nav>
+</nav>*@
