@@ -7,6 +7,7 @@ namespace CapitalEuropeiaGuarda.Models
 {
     public class PontoInteressePorHotel
     {
+        public int PontoInteressePorHotelId { get; set; }
         public int HotelId { get; set; }
 
         public Hoteis Hoteis { get; set; }
