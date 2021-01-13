@@ -23,5 +23,6 @@ namespace CapitalEuropeiaGuarda.Models
         public string Local { get; set; }
 
         public ICollection<PontoInteressePorHotel> PontoInteressePorHoteis { get; set; }
+
     }
 }

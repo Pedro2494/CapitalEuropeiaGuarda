@@ -1,6 +1,7 @@
 ﻿@model IEnumerable<CapitalEuropeiaGuarda.Models.Hoteis>
 @*@model HotelListViewModel*@
 
+
 @{
     ViewData["Title"] = "Index";
 }
@@ -10,6 +11,25 @@
 <p>
     <a asp-action="Create">Adicionar novo Hotel</a>
 </p>
+
+@* Adicionei o search box *@
+@*<div class="card mt-3 bg-info">
+    <div class="card-header">
+        <div class="card-title font-weight-bold">Search</div>
+    </div>
+    <div class="card-body">
+        <form asp-action="Index" method="get">
+            <label for="name">Name</label>
+            <input name="name" type="search" class="form-control" value="@Model.SearchName" />
+            <input name="page" type="hidden" value="1" />
+            <div class="mt-3">
+                <input type="submit" value="Search" class="btn btn-primary" />
+                <a asp-action="Index" class="btn btn-secondary">Clear</a>
+            </div>
+        </form>
+    </div>
+</div>*@
+@* Fim do search box *@
 <table class="table">
     <thead>
         <tr>
@@ -54,7 +74,7 @@
     </tbody>
 </table>
 <br />
-
+@* Adicionei paginação *@
 @*<nav class="mt-3">
     <ul class="pagination">
         <li class="page-item"><a class="page-link" asp-action="Index" asp-route-page="1">First</a></li>
@@ -82,4 +102,4 @@
         <li class="page-item"><a class="page-link" asp-action="Index" asp-route-page="@Model.Pagination.TotalPages">Last</a></li>
     </ul>
 </nav>*@
-
+@* Fim da paginação *@

@@ -20,20 +20,23 @@ namespace CapitalEuropeiaGuarda.Controllers
         }
 
         // GET: Hoteis
-        public async Task<IActionResult> Index(int page = 1)
+        public async Task<IActionResult> Index(string name = null, int page = 1)
         {
             //var pagination = new PagingInfo
             //{
             //    CurrentPage = page,
             //    PageSize = PagingInfo.DEFAULT_PAGE_SIZE,
-            //    TotalItems = _context.Hoteis.Count()
+            //    TotalItems = _context.Hoteis.Where(p => name == null || p.Nome.Contains(name)).Count()
             //};
             //return View(
             //    new HotelListViewModel
             //    {
-            //        hotel = _context.Hoteis
-            //        .Skip((page - 1) * pagination.PageSize),
-            //        Pagination = pagination
+            //        hotel = _context.Hoteis.Where(p => name == null || p.Nome.Contains(name))
+            //        .OrderBy(p => p.HoteisId)
+            //        .Skip((page - 1) * pagination.PageSize)
+            //        .Take(pagination.PageSize),
+            //        Pagination = pagination,
+            //        SearchName = name
             //    }
             //    );
              return View(await _context.Hoteis.ToListAsync());
