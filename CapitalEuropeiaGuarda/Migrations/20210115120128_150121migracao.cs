@@ -2,24 +2,24 @@
 
 namespace CapitalEuropeiaGuarda.Migrations
 {
-    public partial class Mig : Migration
+    public partial class _150121migracao : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "aluguercarros",
+                name: "Empresaaluguer",
                 columns: table => new
                 {
-                    aluguercarrosId = table.Column<int>(nullable: false)
+                    empresaaluguerId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Marca = table.Column<string>(nullable: false),
-                    Modelo = table.Column<string>(nullable: false),
-                    Lugares = table.Column<int>(nullable: false),
-                    LinkReserva = table.Column<string>(nullable: true)
+                    NomeEmpresa = table.Column<string>(nullable: true),
+                    Descricao = table.Column<string>(nullable: true),
+                    Url = table.Column<string>(nullable: true),
+                    Morada = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_aluguercarros", x => x.aluguercarrosId);
+                    table.PrimaryKey("PK_Empresaaluguer", x => x.empresaaluguerId);
                 });
 
             migrationBuilder.CreateTable(
@@ -51,6 +51,55 @@ namespace CapitalEuropeiaGuarda.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_PontoInteresse", x => x.PontoInteresseId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ReservaExcursao",
+                columns: table => new
+                {
+                    ReservaExcursaoId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    DataReserva = table.Column<string>(nullable: true),
+                    NumPessoas = table.Column<int>(nullable: false),
+                    Cancelado = table.Column<bool>(nullable: false),
+                    DataCancelar = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ReservaExcursao", x => x.ReservaExcursaoId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Turista",
+                columns: table => new
+                {
+                    TuristaId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Nome = table.Column<string>(nullable: true),
+                    Ativo = table.Column<bool>(nullable: false),
+                    Email = table.Column<string>(nullable: true),
+                    Nif = table.Column<int>(nullable: false),
+                    Telemovel = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Turista", x => x.TuristaId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Veiculo",
+                columns: table => new
+                {
+                    VeiculoId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Modelo = table.Column<string>(nullable: true),
+                    Marca = table.Column<string>(nullable: true),
+                    Max_lugares = table.Column<int>(nullable: false),
+                    Min_lugares = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Veiculo", x => x.VeiculoId);
                 });
 
             migrationBuilder.CreateTable(
@@ -94,10 +143,19 @@ namespace CapitalEuropeiaGuarda.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "aluguercarros");
+                name: "Empresaaluguer");
 
             migrationBuilder.DropTable(
                 name: "PontoInteressePorHotel");
+
+            migrationBuilder.DropTable(
+                name: "ReservaExcursao");
+
+            migrationBuilder.DropTable(
+                name: "Turista");
+
+            migrationBuilder.DropTable(
+                name: "Veiculo");
 
             migrationBuilder.DropTable(
                 name: "Hoteis");
