@@ -21,5 +21,9 @@ namespace CapitalEuropeiaGuarda.Data
 
         public DbSet<CapitalEuropeiaGuarda.Models.PontoInteresse> PontoInteresse { get; set; }
 
+        public DbSet<CapitalEuropeiaGuarda.Models.ReservaExcursao> ReservaExcursao { get; set; }
+
+        public DbSet<CapitalEuropeiaGuarda.Models.Turista> Turista { get; set; }
+
     }
 }
