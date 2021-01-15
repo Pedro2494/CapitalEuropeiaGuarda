@@ -42,6 +42,10 @@ namespace CapitalEuropeiaGuarda.Controllers
             return View();
         }
 
+        public IActionResult Covid19()
+        {
+            return View();
+        }
 
         public IActionResult Register()
         {
