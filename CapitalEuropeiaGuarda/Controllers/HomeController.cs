@@ -23,7 +23,6 @@ namespace CapitalEuropeiaGuarda.Controllers
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
-            con.ConnectionString = CapitalEuropeiaGuarda.Properties.Resources.ConnectionString;
         }
 
         public IActionResult Index()
