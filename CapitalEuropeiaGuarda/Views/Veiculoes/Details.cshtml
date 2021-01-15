@@ -1,0 +1,42 @@
+﻿@model CapitalEuropeiaGuarda.Models.Veiculo
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Veiculo</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Modelo)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Modelo)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Marca)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Marca)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Max_lugares)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Max_lugares)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Min_lugares)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Min_lugares)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.VeiculoId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
