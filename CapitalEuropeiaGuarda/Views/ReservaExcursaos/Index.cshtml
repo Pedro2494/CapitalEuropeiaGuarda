@@ -1,0 +1,53 @@
+﻿@model IEnumerable<CapitalEuropeiaGuarda.Models.ReservaExcursao>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.DataReserva)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NumPessoas)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cancelado)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataCancelar)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataReserva)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumPessoas)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cancelado)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataCancelar)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ReservaExcursaoId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.ReservaExcursaoId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.ReservaExcursaoId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
