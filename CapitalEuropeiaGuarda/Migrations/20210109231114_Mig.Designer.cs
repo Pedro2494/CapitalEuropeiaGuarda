@@ -4,45 +4,22 @@ using CapitalEuropeiaGuarda.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CapitalEuropeiaGuarda.Migrations
 {
     [DbContext(typeof(CapitalEuropeiaGuardaContext))]
-    partial class CapitalEuropeiaGuardaContextModelSnapshot : ModelSnapshot
+    [Migration("20210109231114_Mig")]
+    partial class Mig
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
-
+#pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "3.1.10")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-
-            modelBuilder.Entity("CapitalEuropeiaGuarda.Models.Empresaaluguer", b =>
-                {
-                    b.Property<int>("empresaaluguerId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Descricao")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Morada")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("NomeEmpresa")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Url")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("empresaaluguerId");
-
-                    b.ToTable("Empresaaluguer");
-                });
 
             modelBuilder.Entity("CapitalEuropeiaGuarda.Models.Hoteis", b =>
                 {
@@ -122,57 +99,6 @@ namespace CapitalEuropeiaGuarda.Migrations
                     b.ToTable("PontoInteressePorHotel");
                 });
 
-            modelBuilder.Entity("CapitalEuropeiaGuarda.Models.ReservaExcursao", b =>
-                {
-                    b.Property<int>("ReservaExcursaoId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<bool>("Cancelado")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("DataCancelar")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("DataReserva")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("NumPessoas")
-                        .HasColumnType("int");
-
-                    b.HasKey("ReservaExcursaoId");
-
-                    b.ToTable("ReservaExcursao");
-                });
-
-            modelBuilder.Entity("CapitalEuropeiaGuarda.Models.Turista", b =>
-                {
-                    b.Property<int>("TuristaId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<bool>("Ativo")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Nif")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Nome")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Telemovel")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("TuristaId");
-
-                    b.ToTable("Turista");
-                });
-
             modelBuilder.Entity("CapitalEuropeiaGuarda.Models.aluguercarros", b =>
                 {
                     b.Property<int>("aluguercarrosId")
@@ -211,7 +137,7 @@ namespace CapitalEuropeiaGuarda.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
-
+#pragma warning restore 612, 618
         }
     }
 }

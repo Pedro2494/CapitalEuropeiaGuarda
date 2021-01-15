@@ -12,12 +12,15 @@ namespace CapitalEuropeiaGuarda.Models
 
         [Required(ErrorMessage = "Insira o nome do Ponto de Interesse")]
         [StringLength(50, MinimumLength = 3)]
-        public String Nome { get; set; }
+        public string Nome { get; set; }
 
         [Required(ErrorMessage = "Insira o Local")]
-        public String Local { get; set; }
+        public string Local { get; set; }
 
         [Required(ErrorMessage = "Insira uma Descrição")]
-        public String DescricaoCurta { get; set; }
+        public string DescricaoCurta { get; set; }
+
+        public ICollection<PontoInteressePorHotel> HoteisPorPontoInteresse { get; set; }
+
     }
 }
