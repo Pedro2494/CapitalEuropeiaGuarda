@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CapitalEuropeiaGuarda.Migrations
 {
     [DbContext(typeof(CapitalEuropeiaGuardaContext))]
-    [Migration("20210115120543_migra1")]
-    partial class migra1
+    [Migration("20210118231657_mig1")]
+    partial class mig1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -142,7 +142,12 @@ namespace CapitalEuropeiaGuarda.Migrations
                     b.Property<int>("NumPessoas")
                         .HasColumnType("int");
 
+                    b.Property<int?>("TuristaId")
+                        .HasColumnType("int");
+
                     b.HasKey("ReservaExcursaoId");
+
+                    b.HasIndex("TuristaId");
 
                     b.ToTable("ReservaExcursao");
                 });
@@ -158,15 +163,18 @@ namespace CapitalEuropeiaGuarda.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("Email")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Nif")
                         .HasColumnType("int");
 
                     b.Property<string>("Nome")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Telemovel")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("TuristaId");
@@ -182,6 +190,7 @@ namespace CapitalEuropeiaGuarda.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Marca")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Max_lugares")
@@ -191,6 +200,7 @@ namespace CapitalEuropeiaGuarda.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Modelo")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("VeiculoId");
@@ -209,6 +219,13 @@ namespace CapitalEuropeiaGuarda.Migrations
                         .HasForeignKey("PontoInteresseId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("CapitalEuropeiaGuarda.Models.ReservaExcursao", b =>
+                {
+                    b.HasOne("CapitalEuropeiaGuarda.Models.Turista", "Turista")
+                        .WithMany("reservaexcursoes")
+                        .HasForeignKey("TuristaId");
                 });
 #pragma warning restore 612, 618
         }

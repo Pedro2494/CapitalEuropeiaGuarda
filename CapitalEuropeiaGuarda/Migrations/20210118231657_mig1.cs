@@ -2,24 +2,24 @@
 
 namespace CapitalEuropeiaGuarda.Migrations
 {
-    public partial class Mig : Migration
+    public partial class mig1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "aluguercarros",
+                name: "Empresaaluguer",
                 columns: table => new
                 {
-                    aluguercarrosId = table.Column<int>(nullable: false)
+                    empresaaluguerId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Marca = table.Column<string>(nullable: false),
-                    Modelo = table.Column<string>(nullable: false),
-                    Lugares = table.Column<int>(nullable: false),
-                    LinkReserva = table.Column<string>(nullable: true)
+                    NomeEmpresa = table.Column<string>(nullable: true),
+                    Descricao = table.Column<string>(nullable: true),
+                    Url = table.Column<string>(nullable: true),
+                    Morada = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_aluguercarros", x => x.aluguercarrosId);
+                    table.PrimaryKey("PK_Empresaaluguer", x => x.empresaaluguerId);
                 });
 
             migrationBuilder.CreateTable(
@@ -54,6 +54,39 @@ namespace CapitalEuropeiaGuarda.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Turista",
+                columns: table => new
+                {
+                    TuristaId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Nome = table.Column<string>(nullable: false),
+                    Ativo = table.Column<bool>(nullable: false),
+                    Email = table.Column<string>(nullable: false),
+                    Nif = table.Column<int>(nullable: false),
+                    Telemovel = table.Column<string>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Turista", x => x.TuristaId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Veiculo",
+                columns: table => new
+                {
+                    VeiculoId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Modelo = table.Column<string>(nullable: false),
+                    Marca = table.Column<string>(nullable: false),
+                    Max_lugares = table.Column<int>(nullable: false),
+                    Min_lugares = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Veiculo", x => x.VeiculoId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "PontoInteressePorHotel",
                 columns: table => new
                 {
@@ -80,6 +113,29 @@ namespace CapitalEuropeiaGuarda.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "ReservaExcursao",
+                columns: table => new
+                {
+                    ReservaExcursaoId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    TuristaId = table.Column<int>(nullable: true),
+                    DataReserva = table.Column<string>(nullable: true),
+                    NumPessoas = table.Column<int>(nullable: false),
+                    Cancelado = table.Column<bool>(nullable: false),
+                    DataCancelar = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ReservaExcursao", x => x.ReservaExcursaoId);
+                    table.ForeignKey(
+                        name: "FK_ReservaExcursao_Turista_TuristaId",
+                        column: x => x.TuristaId,
+                        principalTable: "Turista",
+                        principalColumn: "TuristaId",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_PontoInteressePorHotel_HoteisId",
                 table: "PontoInteressePorHotel",
@@ -89,21 +145,35 @@ namespace CapitalEuropeiaGuarda.Migrations
                 name: "IX_PontoInteressePorHotel_PontoInteresseId",
                 table: "PontoInteressePorHotel",
                 column: "PontoInteresseId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ReservaExcursao_TuristaId",
+                table: "ReservaExcursao",
+                column: "TuristaId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "aluguercarros");
+                name: "Empresaaluguer");
 
             migrationBuilder.DropTable(
                 name: "PontoInteressePorHotel");
+
+            migrationBuilder.DropTable(
+                name: "ReservaExcursao");
+
+            migrationBuilder.DropTable(
+                name: "Veiculo");
 
             migrationBuilder.DropTable(
                 name: "Hoteis");
 
             migrationBuilder.DropTable(
                 name: "PontoInteresse");
+
+            migrationBuilder.DropTable(
+                name: "Turista");
         }
     }
 }
