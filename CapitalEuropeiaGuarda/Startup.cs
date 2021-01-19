@@ -12,6 +12,7 @@ using CapitalEuropeiaGuarda.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using CapitalEuropeiaGuarda.Models;
 
 namespace CapitalEuropeiaGuarda
 {
@@ -37,6 +38,8 @@ namespace CapitalEuropeiaGuarda
 
             services.AddDbContext<CapitalEuropeiaGuardaContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("CapitalEuropeiaGuardaContext")));
+
+            services.AddTransient<IPontosRepository, PontosFakeRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

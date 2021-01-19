@@ -12,6 +12,12 @@ namespace CapitalEuropeiaGuarda.Controllers
 {
     public class PontoInteressesController : Controller
     {
+        private IPontosRepository repository;
+        public PontoInteressesController(IPontosRepository repository)
+        {
+            this.repository = repository;
+        }
+
         private readonly CapitalEuropeiaGuardaContext _context;
 
         public PontoInteressesController(CapitalEuropeiaGuardaContext context)
