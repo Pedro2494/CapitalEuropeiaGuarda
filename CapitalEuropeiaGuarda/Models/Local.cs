@@ -13,8 +13,10 @@ namespace CapitalEuropeiaGuarda.Models
         [Required(ErrorMessage = "Insira o nome do Local")]
         public string Nome { get; set; }
 
+        [Required(ErrorMessage = "Insira o concelho")]
         public string Concelho { get; set; }
 
+        [Required(ErrorMessage = "Insira as coordenadas")]
         public string Coordenadas { get; set; }
     }
 }
