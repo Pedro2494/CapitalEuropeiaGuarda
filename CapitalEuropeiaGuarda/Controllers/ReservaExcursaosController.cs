@@ -60,7 +60,14 @@ namespace CapitalEuropeiaGuarda.Controllers
             {
                 _context.Add(reservaExcursao);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+
+                ViewBag.title = "Excursão reservada com sucesso";
+                ViewBag.type = "alert-sucess";
+                ViewBag.redirect = "/reservaExcursaos/Index"; //vai para pagInicial
+
+                return View("Confirmacao");
+              
+                // todo: inform the user that the author was successfully created 
             }
             return View(reservaExcursao);
         }
@@ -76,7 +83,13 @@ namespace CapitalEuropeiaGuarda.Controllers
             var reservaExcursao = await _context.ReservaExcursao.FindAsync(id);
             if (reservaExcursao == null)
             {
-                return NotFound();
+
+                ViewBag.title = "Esta excursão já foi eliminada";
+                ViewBag.type = "alert-sucess";
+                ViewBag.redirect = "/reservaExcursaos/Index";
+
+                return View("InfoEliminado");
+                // todo: Maybe someone delete it. Show appropriate message
             }
             return View(reservaExcursao);
         }
@@ -111,7 +124,12 @@ namespace CapitalEuropeiaGuarda.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+
+                ViewBag.title = "Excursão editada com sucesso";
+                ViewBag.type = "alert-sucess";
+                ViewBag.redirect = "/reservaExcursaos/Index"; //vai para pagInicial
+                // todo: inform the user that the author was successfully edited
+                return View("Editado");
             }
             return View(reservaExcursao);
         }
@@ -128,7 +146,11 @@ namespace CapitalEuropeiaGuarda.Controllers
                 .FirstOrDefaultAsync(m => m.ReservaExcursaoId == id);
             if (reservaExcursao == null)
             {
-                return NotFound();
+                ViewBag.title = "Excursão eliminada com sucesso";
+                ViewBag.type = "alert-sucess";
+                ViewBag.redirect = "/reservaExcursaos/Index"; //vai para pagInicial
+                // todo: inform the user that the author was successfully deleted
+                return View("Eliminado");
             }
 
             return View(reservaExcursao);
@@ -142,7 +164,14 @@ namespace CapitalEuropeiaGuarda.Controllers
             var reservaExcursao = await _context.ReservaExcursao.FindAsync(id);
             _context.ReservaExcursao.Remove(reservaExcursao);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+
+            ViewBag.title = "Excursão eliminada com sucesso";
+            ViewBag.type = "alert-sucess";
+            ViewBag.redirect = "/reservaExcursaos/Index"; //vai para pagInicial
+            // todo: inform the user that the author was successfully deleted
+            return View("Eliminado");
+
+            // todo: inform the user that the author was successfully deleted
         }
 
         private bool ReservaExcursaoExists(int id)

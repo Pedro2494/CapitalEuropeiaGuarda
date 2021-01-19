@@ -60,7 +60,14 @@ namespace CapitalEuropeiaGuarda.Controllers
             {
                 _context.Add(turista);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+
+                ViewBag.title = "Turista adicionado com sucesso";
+                ViewBag.type = "alert-sucess";
+                ViewBag.redirect = "/turistas/Index"; //vai para pagInicial
+
+                // todo: inform the user that the author was successfully created              
+                return View("Confirmacao");
+
             }
             return View(turista);
         }
@@ -111,7 +118,12 @@ namespace CapitalEuropeiaGuarda.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+
+                ViewBag.title = "Turista editado com sucesso";
+                ViewBag.type = "alert-sucess";
+                ViewBag.redirect = "/turistas/Index"; //vai para pagInicial
+                // todo: inform the user that the author was successfully edited
+                return View("editado");
             }
             return View(turista);
         }
