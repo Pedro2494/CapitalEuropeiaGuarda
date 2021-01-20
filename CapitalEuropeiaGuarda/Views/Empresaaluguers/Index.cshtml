@@ -9,20 +9,32 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
+
+<form asp-action="Index" method="get">
+    <div class="form-actions no-color">
+        <p>
+            Find by name: <input type="text" name="SearchString" value="@ViewData["CurrentFilter"]" />
+            <input type="submit" value="Search" class="btn btn-default" /> |
+            <a asp-action="Index">Back to Full List</a>
+        </p>
+    </div>
+</form>
+
+
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.NomeEmpresa)
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["NomeEmpresaSortParm"]">@Html.DisplayNameFor(model => model.NomeEmpresa)</a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Descricao)
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["DescricaoSortParm"]">@Html.DisplayNameFor(model => model.Descricao)</a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Url)
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["UrlSortParm"]">@Html.DisplayNameFor(model => model.Url)</a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Morada)
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["MoradaSortParm"]">@Html.DisplayNameFor(model => model.Morada)</a>
             </th>
             <th></th>
         </tr>

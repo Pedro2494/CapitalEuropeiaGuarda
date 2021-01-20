@@ -20,9 +20,39 @@ namespace CapitalEuropeiaGuarda.Controllers
         }
 
         // GET: Empresaaluguers
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string sortOrder, string searchString)
         {
-            return View(await _context.Empresaaluguer.ToListAsync());
+            ViewData["NomeEmpresaSortParm"] = String.IsNullOrEmpty(sortOrder) ? "nomeempresa_desc" : "";
+            ViewData["DescricaoSortParm"] = String.IsNullOrEmpty(sortOrder) ? "descricao_desc" : "";
+            ViewData["UrlSortParm"] = String.IsNullOrEmpty(sortOrder) ? "url_desc" : "";
+            ViewData["MoradaSortParm"] = String.IsNullOrEmpty(sortOrder) ? "morada_desc" : "";
+            ViewData["CurrentFilter"] = searchString;
+
+
+            var empresaaluguer = from s in _context.Empresaaluguer
+                                 select s;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                empresaaluguer = empresaaluguer.Where(s => s.NomeEmpresa.Contains(searchString) || s.Descricao.Contains(searchString)
+                                                        || s.Url.Contains(searchString) || s.Morada.Contains(searchString));
+            }
+            switch(sortOrder)
+            {
+                case "nomeempresa_desc":
+                    empresaaluguer = empresaaluguer.OrderByDescending(s => s.NomeEmpresa);
+                    break;
+                case "descricao_desc":
+                    empresaaluguer = empresaaluguer.OrderByDescending(s => s.Descricao);
+                    break;
+                case "url_desc":
+                    empresaaluguer = empresaaluguer.OrderByDescending(s => s.Url);
+                    break;
+                case "morada_desc":
+                    empresaaluguer = empresaaluguer.OrderByDescending(s => s.Morada);
+                    break;
+            }
+            return View(await empresaaluguer.AsNoTracking().ToListAsync());
         }
 
         // GET: Empresaaluguers/Details/5
