@@ -9,7 +9,7 @@ namespace CapitalEuropeiaGuarda.Models
     {
         public IEnumerable<aluguercarros> Marca { get; set; }
 
-        public PagingInfo Pagination { get; set; }
+        //public PaginatedList Pagination { get; set; }
 
     }
 }

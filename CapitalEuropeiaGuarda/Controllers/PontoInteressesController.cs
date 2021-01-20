@@ -7,16 +7,12 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CapitalEuropeiaGuarda.Data;
 using CapitalEuropeiaGuarda.Models;
+using PagedList;
 
 namespace CapitalEuropeiaGuarda.Controllers
 {
     public class PontoInteressesController : Controller
     {
-        private IPontosRepository repository;
-        public PontoInteressesController(IPontosRepository repository)
-        {
-            this.repository = repository;
-        }
 
         private readonly CapitalEuropeiaGuardaContext _context;
 
@@ -26,9 +22,52 @@ namespace CapitalEuropeiaGuarda.Controllers
         }
 
         // GET: PontoInteresses
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string sortOrder,
+        string currentFilter,
+        string searchString,
+        int? pageNumber)
         {
-            return View(await _context.PontoInteresse.ToListAsync());
+            ViewData["CurrentSort"] = sortOrder;
+
+            ViewData["NomeSortParm"] = String.IsNullOrEmpty(sortOrder) ? "nome_desc" : "";
+            ViewData["LocalSortParm"] = String.IsNullOrEmpty(sortOrder) ? "local_desc" : "";
+            ViewData["DescricaoCurtaSortParm"] = String.IsNullOrEmpty(sortOrder) ? "descricaocurta_desc" : "";
+
+            ViewData["CurrentFilter"] = searchString;
+
+            if (searchString != null)
+            {
+                pageNumber = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            var pontointeresse = from s in _context.PontoInteresse
+                         select s;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                pontointeresse = pontointeresse.Where(s => s.Nome.Contains(searchString)
+                                || s.DescricaoCurta.Contains(searchString));
+            }
+
+            switch (sortOrder)
+            {
+                case "nome_desc":
+                    pontointeresse = pontointeresse.OrderByDescending(s => s.Nome);
+                    break;
+                case "descricaocurta_desc":
+                    pontointeresse = pontointeresse.OrderByDescending(s => s.DescricaoCurta);
+                    break;
+                case "local_desc":
+                    pontointeresse = pontointeresse.OrderByDescending(s => s.Local);
+                    break;
+            }
+            int pageSize = 3;
+            return View(await PaginatedList<PontoInteresse>.CreateAsync(pontointeresse.AsNoTracking(), pageNumber ?? 1, pageSize));
+
 
         }
 
