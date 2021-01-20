@@ -20,17 +20,26 @@ namespace CapitalEuropeiaGuarda.Controllers
         }
 
         // GET: Empresaaluguers
-        public async Task<IActionResult> Index(string sortOrder, string searchString)
+        public async Task<IActionResult> Index(string sortOrder, string searchString, string currentFilter, int? pageNumber)
         {
             ViewData["NomeEmpresaSortParm"] = String.IsNullOrEmpty(sortOrder) ? "nomeempresa_desc" : "";
             ViewData["DescricaoSortParm"] = String.IsNullOrEmpty(sortOrder) ? "descricao_desc" : "";
             ViewData["UrlSortParm"] = String.IsNullOrEmpty(sortOrder) ? "url_desc" : "";
             ViewData["MoradaSortParm"] = String.IsNullOrEmpty(sortOrder) ? "morada_desc" : "";
             ViewData["CurrentFilter"] = searchString;
-
+            ViewData["CurrentSort"] = sortOrder;
 
             var empresaaluguer = from s in _context.Empresaaluguer
                                  select s;
+
+            if (searchString != null)
+            {
+                pageNumber = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
 
             if (!String.IsNullOrEmpty(searchString))
             {
@@ -52,7 +61,8 @@ namespace CapitalEuropeiaGuarda.Controllers
                     empresaaluguer = empresaaluguer.OrderByDescending(s => s.Morada);
                     break;
             }
-            return View(await empresaaluguer.AsNoTracking().ToListAsync());
+            int pageSize = 3;
+            return View(await PaginatedList<Empresaaluguer>.CreateAsync(empresaaluguer.AsNoTracking(), pageNumber ?? 1, pageSize));
         }
 
         // GET: Empresaaluguers/Details/5

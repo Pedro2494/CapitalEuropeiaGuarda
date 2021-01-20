@@ -9,7 +9,7 @@ namespace CapitalEuropeiaGuarda.Models
     {
        public IEnumerable<Hoteis> hotel { get; set; }
 
-        public PagingInfo Pagination { get; set; }
+        //public PagingInfo Pagination { get; set; }
 
         public string SearchName { get; set; }
     }
