@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CapitalEuropeiaGuarda.Data;
 using CapitalEuropeiaGuarda.Models;
+using PagedList;
+
 
 namespace CapitalEuropeiaGuarda.Controllers
 {
@@ -19,27 +21,65 @@ namespace CapitalEuropeiaGuarda.Controllers
             _context = context;
         }
 
+        //// GET: Hoteis
+        //public async Task<IActionResult> Index()
+        //{
+            
+        //     return View(await _context.Hoteis.ToListAsync());
+        //}
+
         // GET: Hoteis
-        public async Task<IActionResult> Index(string name = null, int page = 1)
+        public async Task<IActionResult> Index(string sortOrder,
+        string currentFilter,
+        string searchString,
+        int? pageNumber)
         {
-            //var pagination = new PagingInfo
-            //{
-            //    CurrentPage = page,
-            //    PageSize = PagingInfo.DEFAULT_PAGE_SIZE,
-            //    TotalItems = _context.Hoteis.Where(p => name == null || p.Nome.Contains(name)).Count()
-            //};
-            //return View(
-            //    new HotelListViewModel
-            //    {
-            //        hotel = _context.Hoteis.Where(p => name == null || p.Nome.Contains(name))
-            //        .OrderBy(p => p.HoteisId)
-            //        .Skip((page - 1) * pagination.PageSize)
-            //        .Take(pagination.PageSize),
-            //        Pagination = pagination,
-            //        SearchName = name
-            //    }
-            //    );
-             return View(await _context.Hoteis.ToListAsync());
+            ViewData["CurrentSort"] = sortOrder;
+
+            ViewData["NomeSortParm"] = String.IsNullOrEmpty(sortOrder) ? "nome_desc" : "";
+            ViewData["DescricaoCurtaSortParm"] = String.IsNullOrEmpty(sortOrder) ? "descricaocurta_desc" : "";
+            ViewData["HotelUrlSortParm"] = String.IsNullOrEmpty(sortOrder) ? "hotelurl_desc" : "";
+            ViewData["LocalSortParm"] = String.IsNullOrEmpty(sortOrder) ? "local_desc" : "";
+
+            ViewData["CurrentFilter"] = searchString;
+
+            if (searchString != null)
+            {
+                pageNumber = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            var hoteis = from s in _context.Hoteis
+                         select s;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                hoteis = hoteis.Where(s => s.Nome.Contains(searchString)
+                                || s.DescricaoCurta.Contains(searchString));
+            }
+
+                switch (sortOrder)
+            {
+                case "nome_desc":
+                    hoteis = hoteis.OrderByDescending(s => s.Nome);
+                    break;
+                case "descricaocurta_desc":
+                    hoteis = hoteis.OrderByDescending(s => s.DescricaoCurta);
+                    break;
+                case "hotelurl_desc":
+                    hoteis = hoteis.OrderByDescending(s => s.HotelUrl);
+                    break;
+                case "local_desc":
+                    hoteis = hoteis.OrderByDescending(s => s.Local);
+                    break;
+            }
+            int pageSize = 3;
+            return View(await PaginatedList<Hoteis>.CreateAsync(hoteis.AsNoTracking(), pageNumber ?? 1, pageSize));
+
+            //return View(hoteis.ToList());
         }
 
         // GET: Hoteis/Details/5
