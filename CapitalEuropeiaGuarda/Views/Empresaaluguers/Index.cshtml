@@ -7,15 +7,15 @@
 <h1>Index</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Criar Novo</a>
 </p>
 
 <form asp-action="Index" method="get">
     <div class="form-actions no-color">
         <p>
-            Find by name: <input type="text" name="SearchString" value="@ViewData["CurrentFilter"]" />
-            <input type="submit" value="Search" class="btn btn-default" /> |
-            <a asp-action="Index">Back to Full List</a>
+            Procurar por nome:  <input type="text" name="SearchString" value="@ViewData["CurrentFilter"]" />
+            <input type="submit" value="Procurar" class="btn btn-default" /> |
+            <a asp-action="Index">Voltar à lista completa</a>
         </p>
     </div>
 </form>
@@ -28,13 +28,13 @@
                 <a asp-action="Index" asp-route-sortOrder="@ViewData["NomeEmpresaSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Nome Empresa</a>
             </th>
             <th>
-                <a asp-action="Index" asp-route-sortOrder="@ViewData["DescricaoSortParm"]">asp-route-currentFilter="@ViewData["CurrentFilter"]">Descricao</a>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["DescricaoSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Descricao</a>
             </th>
             <th>
-                <a asp-action="Index" asp-route-sortOrder="@ViewData["UrlSortParm"]">asp-route-currentFilter="@ViewData["CurrentFilter"]">Url</a>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["UrlSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Url</a>
             </th>
             <th>
-                <a asp-action="Index" asp-route-sortOrder="@ViewData["MoradaSortParm"]">asp-route-currentFilter="@ViewData["CurrentFilter"]">Morada</a>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["MoradaSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Morada</a>
             </th>
             <th></th>
         </tr>
@@ -56,9 +56,9 @@
                     @Html.DisplayFor(modelItem => item.Morada)
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.empresaaluguerId">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.empresaaluguerId">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.empresaaluguerId">Delete</a>
+                    <a asp-action="Edit" asp-route-id="@item.empresaaluguerId">Editar</a> |
+                    <a asp-action="Details" asp-route-id="@item.empresaaluguerId">Detalhes</a> |
+                    <a asp-action="Delete" asp-route-id="@item.empresaaluguerId">Apagar</a>
                 </td>
             </tr>
         }
@@ -75,12 +75,12 @@
    asp-route-pageNumber="@(Model.PageIndex - 1)"
    asp-route-currentFilter="@ViewData["CurrentFilter"]"
    class="btn btn-default @prevDisabled">
-    Previous
+    Anterior
 </a>
 <a asp-action="Index"
    asp-route-sortOrder="@ViewData["CurrentSort"]"
    asp-route-pageNumber="@(Model.PageIndex + 1)"
    asp-route-currentFilter="@ViewData["CurrentFilter"]"
    class="btn btn-default @nextDisabled">
-    Next
+    Seguinte
 </a>

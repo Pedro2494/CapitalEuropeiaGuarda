@@ -100,7 +100,12 @@ namespace CapitalEuropeiaGuarda.Controllers
             {
                 _context.Add(empresaaluguer);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                ViewBag.title = "Empresa adicionada com sucesso";
+                ViewBag.type = "alert-sucess";
+                ViewBag.redirect = "/empresaaluguers/Index"; //vai para pagInicial
+
+                // todo: inform the user that the author was successfully created              
+                return View("ConfirmaCriar");
             }
             return View(empresaaluguer);
         }
@@ -151,7 +156,13 @@ namespace CapitalEuropeiaGuarda.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                ViewBag.message = "Empresa de aluguer alterada com sucesso!";
+                ViewBag.type = "alert-sucess";
+                // Volta para a página de Aluguer de Empresa
+                ViewBag.redirect = "/empresaaluguers/Index";
+                // todo: inform the user that the author was successfully edited
+                return View("ConfirmaEditar");
+                
             }
             return View(empresaaluguer);
         }
@@ -182,7 +193,12 @@ namespace CapitalEuropeiaGuarda.Controllers
             var empresaaluguer = await _context.Empresaaluguer.FindAsync(id);
             _context.Empresaaluguer.Remove(empresaaluguer);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+
+            ViewBag.message = "Empresa de aluguer eliminado!";
+            ViewBag.type = "alert-sucess";
+            ViewBag.redirect = "/empresaaluguers/Index"; //vai para pagInicial
+            // todo: inform the user that the author was successfully deleted
+            return View("ConfirmaEliminar");
         }
 
         private bool EmpresaaluguerExists(int id)
