@@ -10,14 +10,14 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CapitalEuropeiaGuarda.Migrations
 {
     [DbContext(typeof(CapitalEuropeiaGuardaContext))]
-    [Migration("20210118231657_mig1")]
+    [Migration("20210122120355_mig1")]
     partial class mig1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.10")
+                .HasAnnotation("ProductVersion", "3.1.11")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -29,15 +29,19 @@ namespace CapitalEuropeiaGuarda.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Descricao")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Morada")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NomeEmpresa")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Url")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("empresaaluguerId");
@@ -71,6 +75,30 @@ namespace CapitalEuropeiaGuarda.Migrations
                     b.HasKey("HoteisId");
 
                     b.ToTable("Hoteis");
+                });
+
+            modelBuilder.Entity("CapitalEuropeiaGuarda.Models.Local", b =>
+                {
+                    b.Property<int>("localID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Concelho")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Coordenadas")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("localID");
+
+                    b.ToTable("Local");
                 });
 
             modelBuilder.Entity("CapitalEuropeiaGuarda.Models.PontoInteresse", b =>

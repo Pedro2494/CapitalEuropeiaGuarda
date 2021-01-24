@@ -12,10 +12,10 @@ namespace CapitalEuropeiaGuarda.Migrations
                 {
                     empresaaluguerId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    NomeEmpresa = table.Column<string>(nullable: true),
-                    Descricao = table.Column<string>(nullable: true),
-                    Url = table.Column<string>(nullable: true),
-                    Morada = table.Column<string>(nullable: true)
+                    NomeEmpresa = table.Column<string>(nullable: false),
+                    Descricao = table.Column<string>(nullable: false),
+                    Url = table.Column<string>(nullable: false),
+                    Morada = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -36,6 +36,21 @@ namespace CapitalEuropeiaGuarda.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Hoteis", x => x.HoteisId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Local",
+                columns: table => new
+                {
+                    localID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Nome = table.Column<string>(nullable: false),
+                    Concelho = table.Column<string>(nullable: false),
+                    Coordenadas = table.Column<string>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Local", x => x.localID);
                 });
 
             migrationBuilder.CreateTable(
@@ -156,6 +171,9 @@ namespace CapitalEuropeiaGuarda.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Empresaaluguer");
+
+            migrationBuilder.DropTable(
+                name: "Local");
 
             migrationBuilder.DropTable(
                 name: "PontoInteressePorHotel");

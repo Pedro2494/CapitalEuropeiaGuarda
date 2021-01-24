@@ -24,5 +24,7 @@ namespace CapitalEuropeiaGuarda.Models
 
         public ICollection<PontoInteressePorHotel> PontoInteressePorHoteis { get; set; }
 
+        
+
     }
 }

@@ -18,5 +18,7 @@ namespace CapitalEuropeiaGuarda.Models
 
         [Required(ErrorMessage = "Insira as coordenadas")]
         public string Coordenadas { get; set; }
+
+       
     }
 }

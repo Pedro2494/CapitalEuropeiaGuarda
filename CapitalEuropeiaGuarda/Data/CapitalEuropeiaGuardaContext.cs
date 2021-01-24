@@ -28,6 +28,8 @@ namespace CapitalEuropeiaGuarda.Data
 
         public DbSet<CapitalEuropeiaGuarda.Models.Turista> Turista { get; set; }
 
+        public DbSet<CapitalEuropeiaGuarda.Models.Local> Local { get; set; }
+
 
     }
 }
