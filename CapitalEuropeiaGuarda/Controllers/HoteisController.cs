@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using CapitalEuropeiaGuarda.Data;
 using CapitalEuropeiaGuarda.Models;
 using PagedList;
+using Microsoft.AspNetCore.Authorization;
 
 
 namespace CapitalEuropeiaGuarda.Controllers
@@ -24,11 +25,12 @@ namespace CapitalEuropeiaGuarda.Controllers
         //// GET: Hoteis
         //public async Task<IActionResult> Index()
         //{
-            
+
         //     return View(await _context.Hoteis.ToListAsync());
         //}
 
         // GET: Hoteis
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Index(string sortOrder,
         string currentFilter,
         string searchString,

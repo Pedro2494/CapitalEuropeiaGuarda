@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CapitalEuropeiaGuarda.Data;
 using CapitalEuropeiaGuarda.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CapitalEuropeiaGuarda.Controllers
 {
@@ -20,6 +21,7 @@ namespace CapitalEuropeiaGuarda.Controllers
         }
 
         // GET: Turistas
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Index()
         {
             return View(await _context.Turista.ToListAsync());
