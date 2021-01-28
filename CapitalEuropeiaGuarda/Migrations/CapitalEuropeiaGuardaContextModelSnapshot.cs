@@ -35,6 +35,9 @@ namespace CapitalEuropeiaGuarda.Migrations
                     b.Property<string>("NomeEmpresa")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<byte[]>("Photo")
+                        .HasColumnType("varbinary(max)");
+
                     b.Property<string>("Url")
                         .HasColumnType("nvarchar(max)");
 
@@ -191,7 +194,12 @@ namespace CapitalEuropeiaGuarda.Migrations
                     b.Property<string>("Modelo")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("empresaaluguerId")
+                        .HasColumnType("int");
+
                     b.HasKey("VeiculoId");
+
+                    b.HasIndex("empresaaluguerId");
 
                     b.ToTable("Veiculo");
                 });
@@ -207,6 +215,13 @@ namespace CapitalEuropeiaGuarda.Migrations
                         .HasForeignKey("PontoInteresseId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("CapitalEuropeiaGuarda.Models.Veiculo", b =>
+                {
+                    b.HasOne("CapitalEuropeiaGuarda.Models.Empresaaluguer", null)
+                        .WithMany("Veiculo")
+                        .HasForeignKey("empresaaluguerId");
                 });
 #pragma warning restore 612, 618
         }

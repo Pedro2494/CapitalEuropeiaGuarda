@@ -7,6 +7,9 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CapitalEuropeiaGuarda.Data;
 using CapitalEuropeiaGuarda.Models;
+using Microsoft.AspNetCore.Http;
+using System.IO;
+
 
 namespace CapitalEuropeiaGuarda.Controllers
 {
@@ -94,10 +97,21 @@ namespace CapitalEuropeiaGuarda.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("empresaaluguerId,NomeEmpresa,Descricao,Url,Morada")] Empresaaluguer empresaaluguer)
+        public async Task<IActionResult> Create([Bind("empresaaluguerId,NomeEmpresa,Descricao,Url,Morada,Photo")] Empresaaluguer empresaaluguer, IFormFile photoFile)
+        
         {
             if (ModelState.IsValid)
             {
+                if (photoFile != null && photoFile.Length > 0)
+                {
+                    using (var memFile = new MemoryStream())
+                    {
+                        photoFile.CopyTo(memFile);
+                        
+                        empresaaluguer.Photo = memFile.ToArray();
+                    }
+                }
+                
                 _context.Add(empresaaluguer);
                 await _context.SaveChangesAsync();
                 ViewBag.title = "Empresa adicionada com sucesso";

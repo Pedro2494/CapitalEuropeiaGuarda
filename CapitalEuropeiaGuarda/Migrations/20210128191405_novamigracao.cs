@@ -1,8 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace CapitalEuropeiaGuarda.Migrations
 {
-    public partial class _150121migracao : Migration
+    public partial class novamigracao : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -15,7 +16,8 @@ namespace CapitalEuropeiaGuarda.Migrations
                     NomeEmpresa = table.Column<string>(nullable: true),
                     Descricao = table.Column<string>(nullable: true),
                     Url = table.Column<string>(nullable: true),
-                    Morada = table.Column<string>(nullable: true)
+                    Morada = table.Column<string>(nullable: true),
+                    Photo = table.Column<byte[]>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -95,11 +97,18 @@ namespace CapitalEuropeiaGuarda.Migrations
                     Modelo = table.Column<string>(nullable: true),
                     Marca = table.Column<string>(nullable: true),
                     Max_lugares = table.Column<int>(nullable: false),
-                    Min_lugares = table.Column<int>(nullable: false)
+                    Min_lugares = table.Column<int>(nullable: false),
+                    empresaaluguerId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Veiculo", x => x.VeiculoId);
+                    table.ForeignKey(
+                        name: "FK_Veiculo_Empresaaluguer_empresaaluguerId",
+                        column: x => x.empresaaluguerId,
+                        principalTable: "Empresaaluguer",
+                        principalColumn: "empresaaluguerId",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -138,13 +147,15 @@ namespace CapitalEuropeiaGuarda.Migrations
                 name: "IX_PontoInteressePorHotel_PontoInteresseId",
                 table: "PontoInteressePorHotel",
                 column: "PontoInteresseId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Veiculo_empresaaluguerId",
+                table: "Veiculo",
+                column: "empresaaluguerId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "Empresaaluguer");
-
             migrationBuilder.DropTable(
                 name: "PontoInteressePorHotel");
 
@@ -162,6 +173,9 @@ namespace CapitalEuropeiaGuarda.Migrations
 
             migrationBuilder.DropTable(
                 name: "PontoInteresse");
+
+            migrationBuilder.DropTable(
+                name: "Empresaaluguer");
         }
     }
 }

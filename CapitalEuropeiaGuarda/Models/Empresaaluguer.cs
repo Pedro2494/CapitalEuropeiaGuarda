@@ -19,5 +19,10 @@ namespace CapitalEuropeiaGuarda.Models
 
         public string Morada { get; set; }
 
+        public byte[] Photo { get; set; }
+
+        public ICollection<Veiculo> Veiculo { get; set; } 
+
+
     }
 }

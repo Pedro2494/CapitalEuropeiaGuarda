@@ -35,7 +35,14 @@
             @Html.DisplayFor(model => model.Morada)
         </dd>
     </dl>
+    <div class="col-2">
+        @if (Model.Photo != null)
+        {
+            <img class="img-responsive full-width" src="data:image/jpeg;base64,@Convert.ToBase64String(Model.Photo)" />
+        }
+    </div>
 </div>
+
 <div>
     <a asp-action="Edit" asp-route-id="@Model.empresaaluguerId">Edit</a> |
     <a asp-action="Index">Back to List</a>
