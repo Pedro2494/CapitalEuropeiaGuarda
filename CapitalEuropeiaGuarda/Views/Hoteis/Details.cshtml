@@ -4,7 +4,7 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<h1>Detalhes</h1>
 
 <div>
     <h4>Hoteis</h4>
@@ -36,7 +36,12 @@
         </dd>
     </dl>
 </div>
+<div class="col-2">
+    @if (Model.Photo != null)
+    {
+<img class="img-responsive full-width" src="data:image/jpeg;base64,@Convert.ToBase64String(Model.Photo)" />}
+</div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.HoteisId">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Edit" asp-route-id="@Model.HoteisId" class="btn btn-info btn-sm">Editar</a> 
+    <a asp-action="Index" class="btn btn-primary btn-sm">Voltar a lista</a>
 </div>

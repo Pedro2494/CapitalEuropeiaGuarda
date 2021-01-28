@@ -7,27 +7,25 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CapitalEuropeiaGuarda.Data;
 using CapitalEuropeiaGuarda.Models;
-using Microsoft.AspNetCore.Authorization;
 
 namespace CapitalEuropeiaGuarda.Controllers
 {
-    public class TuristasController : Controller
+    public class LocalsController : Controller
     {
         private readonly CapitalEuropeiaGuardaContext _context;
 
-        public TuristasController(CapitalEuropeiaGuardaContext context)
+        public LocalsController(CapitalEuropeiaGuardaContext context)
         {
             _context = context;
         }
 
-        // GET: Turistas
-        [Authorize(Roles = "Admin")]
+        // GET: Locals
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Turista.ToListAsync());
+            return View(await _context.Local.ToListAsync());
         }
 
-        // GET: Turistas/Details/5
+        // GET: Locals/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -35,46 +33,39 @@ namespace CapitalEuropeiaGuarda.Controllers
                 return NotFound();
             }
 
-            var turista = await _context.Turista
-                .FirstOrDefaultAsync(m => m.TuristaId == id);
-            if (turista == null)
+            var local = await _context.Local
+                .FirstOrDefaultAsync(m => m.localID == id);
+            if (local == null)
             {
                 return NotFound();
             }
 
-            return View(turista);
+            return View(local);
         }
 
-        // GET: Turistas/Create
+        // GET: Locals/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Turistas/Create
+        // POST: Locals/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("TuristaId,Nome,Ativo,Email,Nif,Telemovel")] Turista turista)
+        public async Task<IActionResult> Create([Bind("localID,Nome,Concelho,Coordenadas")] Local local)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(turista);
+                _context.Add(local);
                 await _context.SaveChangesAsync();
-
-                ViewBag.title = "Turista adicionado com sucesso";
-                ViewBag.type = "alert-sucess";
-                ViewBag.redirect = "/turistas/Index"; //vai para pagInicial
-
-                // todo: inform the user that the author was successfully created              
-                return View("Confirmacao");
-
+                return RedirectToAction(nameof(Index));
             }
-            return View(turista);
+            return View(local);
         }
 
-        // GET: Turistas/Edit/5
+        // GET: Locals/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -82,22 +73,22 @@ namespace CapitalEuropeiaGuarda.Controllers
                 return NotFound();
             }
 
-            var turista = await _context.Turista.FindAsync(id);
-            if (turista == null)
+            var local = await _context.Local.FindAsync(id);
+            if (local == null)
             {
                 return NotFound();
             }
-            return View(turista);
+            return View(local);
         }
 
-        // POST: Turistas/Edit/5
+        // POST: Locals/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("TuristaId,Nome,Ativo,Email,Nif,Telemovel")] Turista turista)
+        public async Task<IActionResult> Edit(int id, [Bind("localID,Nome,Concelho,Coordenadas")] Local local)
         {
-            if (id != turista.TuristaId)
+            if (id != local.localID)
             {
                 return NotFound();
             }
@@ -106,12 +97,12 @@ namespace CapitalEuropeiaGuarda.Controllers
             {
                 try
                 {
-                    _context.Update(turista);
+                    _context.Update(local);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!TuristaExists(turista.TuristaId))
+                    if (!LocalExists(local.localID))
                     {
                         return NotFound();
                     }
@@ -120,17 +111,12 @@ namespace CapitalEuropeiaGuarda.Controllers
                         throw;
                     }
                 }
-
-                ViewBag.title = "Turista editado com sucesso";
-                ViewBag.type = "alert-sucess";
-                ViewBag.redirect = "/turistas/Index"; //vai para pagInicial
-                // todo: inform the user that the author was successfully edited
-                return View("editado");
+                return RedirectToAction(nameof(Index));
             }
-            return View(turista);
+            return View(local);
         }
 
-        // GET: Turistas/Delete/5
+        // GET: Locals/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -138,30 +124,30 @@ namespace CapitalEuropeiaGuarda.Controllers
                 return NotFound();
             }
 
-            var turista = await _context.Turista
-                .FirstOrDefaultAsync(m => m.TuristaId == id);
-            if (turista == null)
+            var local = await _context.Local
+                .FirstOrDefaultAsync(m => m.localID == id);
+            if (local == null)
             {
                 return NotFound();
             }
 
-            return View(turista);
+            return View(local);
         }
 
-        // POST: Turistas/Delete/5
+        // POST: Locals/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var turista = await _context.Turista.FindAsync(id);
-            _context.Turista.Remove(turista);
+            var local = await _context.Local.FindAsync(id);
+            _context.Local.Remove(local);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool TuristaExists(int id)
+        private bool LocalExists(int id)
         {
-            return _context.Turista.Any(e => e.TuristaId == id);
+            return _context.Local.Any(e => e.localID == id);
         }
     }
 }
