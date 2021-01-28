@@ -91,6 +91,9 @@ namespace CapitalEuropeiaGuarda.Migrations
                         .HasColumnType("nvarchar(50)")
                         .HasMaxLength(50);
 
+                    b.Property<byte[]>("Photo")
+                        .HasColumnType("varbinary(max)");
+
                     b.HasKey("PontoInteresseId");
 
                     b.ToTable("PontoInteresse");
@@ -194,6 +197,32 @@ namespace CapitalEuropeiaGuarda.Migrations
                     b.HasKey("VeiculoId");
 
                     b.ToTable("Veiculo");
+                });
+
+            modelBuilder.Entity("CapitalEuropeiaGuarda.Models.aluguercarros", b =>
+                {
+                    b.Property<int>("aluguercarrosId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("LinkReserva")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Lugares")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Marca")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Modelo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("aluguercarrosId");
+
+                    b.ToTable("aluguercarros");
                 });
 
             modelBuilder.Entity("CapitalEuropeiaGuarda.Models.PontoInteressePorHotel", b =>

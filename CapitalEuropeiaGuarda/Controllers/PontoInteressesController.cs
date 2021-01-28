@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using CapitalEuropeiaGuarda.Data;
 using CapitalEuropeiaGuarda.Models;
 using PagedList;
+using Microsoft.AspNetCore.Http;
+using System.IO;
 
 namespace CapitalEuropeiaGuarda.Controllers
 {
@@ -100,10 +102,19 @@ namespace CapitalEuropeiaGuarda.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("PontoInteresseId,Nome,Local,DescricaoCurta")] PontoInteresse pontoInteresse)
+        public async Task<IActionResult> Create([Bind("PontoInteresseId,Nome,Local,DescricaoCurta")] PontoInteresse pontoInteresse, IFormFile photoFile)
         {
             if (ModelState.IsValid)
             {
+                if (photoFile != null && photoFile.Length > 0)
+                {
+                    using (var memFile = new MemoryStream())
+                    {
+                        photoFile.CopyTo(memFile);
+                        pontoInteresse.Photo = memFile.ToArray();
+                    }
+                }
+
                 _context.Add(pontoInteresse);
                 await _context.SaveChangesAsync();
                 //return RedirectToAction(nameof(Index));

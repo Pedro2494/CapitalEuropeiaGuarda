@@ -20,6 +20,8 @@ namespace CapitalEuropeiaGuarda.Models
         [Required(ErrorMessage = "Insira uma Descrição")]
         public string DescricaoCurta { get; set; }
 
+        public byte[] Photo { get; set; }
+
         public ICollection<PontoInteressePorHotel> HoteisPorPontoInteresse { get; set; }
 
     }

@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CapitalEuropeiaGuarda.Migrations
 {
     [DbContext(typeof(CapitalEuropeiaGuardaContext))]
-    [Migration("20210115120718_migracao150121")]
-    partial class migracao150121
+    [Migration("20210128001939_mig28")]
+    partial class mig28
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -92,6 +92,9 @@ namespace CapitalEuropeiaGuarda.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(50)")
                         .HasMaxLength(50);
+
+                    b.Property<byte[]>("Photo")
+                        .HasColumnType("varbinary(max)");
 
                     b.HasKey("PontoInteresseId");
 
@@ -196,6 +199,32 @@ namespace CapitalEuropeiaGuarda.Migrations
                     b.HasKey("VeiculoId");
 
                     b.ToTable("Veiculo");
+                });
+
+            modelBuilder.Entity("CapitalEuropeiaGuarda.Models.aluguercarros", b =>
+                {
+                    b.Property<int>("aluguercarrosId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("LinkReserva")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Lugares")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Marca")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Modelo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("aluguercarrosId");
+
+                    b.ToTable("aluguercarros");
                 });
 
             modelBuilder.Entity("CapitalEuropeiaGuarda.Models.PontoInteressePorHotel", b =>
