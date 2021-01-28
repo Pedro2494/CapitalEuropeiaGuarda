@@ -1,0 +1,44 @@
+﻿@model IEnumerable<CapitalEuropeiaGuarda.Models.Hoteis>
+<!-- Page Content -->
+<div class="container">
+
+    <!-- Heading Row -->
+    <div class="row align-items-center my-5">
+        <div class="col-lg-7">
+            <img class="img-fluid rounded mb-4 mb-lg-0" src="~/images/hotelspa.jpg" alt="">
+        </div>
+        <!-- /.col-lg-8 -->
+        <div class="col-lg-5">
+            <h1 class="font-weight-light">Hoteis</h1>
+            <p>Os melhores hoteis para a sua estdia na beira interior!</p>
+            <a class="btn btn-primary" href="#">Call to Action!</a>
+        </div>
+        <!-- /.col-md-4 -->
+    </div>
+    <!-- /.row -->
+    <!-- Call to Action Well -->
+    <div class="card text-white bg-secondary my-5 py-4 text-center">
+        <div class="card-body">
+            <p class="text-white m-0">This call to action card is a great place to showcase some important information or display a clever tagline!</p>
+        </div>
+    </div>
+
+    @foreach (var item in ViewBag.dadosHoteis)
+    {
+        <!-- Content Row -->
+    <div class="row">
+        <div class="col-md-4 mb-5">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h2 class="card-title">@item.Nome</h2>
+                    <p class="card-text">@item.DescricaoCurta </p>
+                    <p class="card-text">@item.HotelUrl </p>
+                    <p class="card-text">@item.Local </p>
+                    <p class="card-text">@item.Photo </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    }
+</div>
+
