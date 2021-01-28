@@ -107,7 +107,6 @@ namespace CapitalEuropeiaGuarda.Controllers
                     using (var memFile = new MemoryStream())
                     {
                         photoFile.CopyTo(memFile);
-                        
                         empresaaluguer.Photo = memFile.ToArray();
                     }
                 }

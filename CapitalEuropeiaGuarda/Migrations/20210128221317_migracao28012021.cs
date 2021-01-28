@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace CapitalEuropeiaGuarda.Migrations
 {
-    public partial class novamigracao : Migration
+    public partial class migracao28012021 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
