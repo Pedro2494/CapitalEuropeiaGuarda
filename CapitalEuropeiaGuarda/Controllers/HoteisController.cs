@@ -9,7 +9,8 @@ using CapitalEuropeiaGuarda.Data;
 using CapitalEuropeiaGuarda.Models;
 using PagedList;
 using Microsoft.AspNetCore.Authorization;
-
+using Microsoft.AspNetCore.Http;
+using System.IO;
 
 namespace CapitalEuropeiaGuarda.Controllers
 {
@@ -114,10 +115,19 @@ namespace CapitalEuropeiaGuarda.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("HoteisId,Nome,DescricaoCurta,HotelUrl,Local")] Hoteis hoteis)
+        public async Task<IActionResult> Create([Bind("HoteisId,Nome,DescricaoCurta,HotelUrl,Local")] Hoteis hoteis, IFormFile photoFile)
         {
             if (ModelState.IsValid)
             {
+                if (photoFile != null && photoFile.Length > 0)
+                {
+                    using (var memFile = new MemoryStream())
+                    {
+                        photoFile.CopyTo(memFile);
+                        hoteis.Photo = memFile.ToArray();
+                    }
+                }
+
                 // todo: additional validations
 
                 _context.Add(hoteis);
