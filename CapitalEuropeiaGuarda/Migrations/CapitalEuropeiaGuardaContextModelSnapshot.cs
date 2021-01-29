@@ -125,6 +125,9 @@ namespace CapitalEuropeiaGuarda.Migrations
                         .HasColumnType("nvarchar(50)")
                         .HasMaxLength(50);
 
+                    b.Property<byte[]>("Photo")
+                        .HasColumnType("varbinary(max)");
+
                     b.HasKey("PontoInteresseId");
 
                     b.ToTable("PontoInteresse");
@@ -222,7 +225,6 @@ namespace CapitalEuropeiaGuarda.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Marca")
-
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -233,8 +235,8 @@ namespace CapitalEuropeiaGuarda.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Modelo")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
 
                     b.Property<int?>("empresaaluguerId")
                         .HasColumnType("int");
@@ -242,9 +244,6 @@ namespace CapitalEuropeiaGuarda.Migrations
                     b.HasKey("VeiculoId");
 
                     b.HasIndex("empresaaluguerId");
-
-                    b.HasKey("VeiculoId");
-
 
                     b.ToTable("Veiculo");
                 });
@@ -260,20 +259,20 @@ namespace CapitalEuropeiaGuarda.Migrations
                         .HasForeignKey("PontoInteresseId");
                 });
 
+            modelBuilder.Entity("CapitalEuropeiaGuarda.Models.ReservaExcursao", b =>
+                {
+                    b.HasOne("CapitalEuropeiaGuarda.Models.Turista", "Turista")
+                        .WithMany("reservaexcursoes")
+                        .HasForeignKey("TuristaId");
+                });
 
             modelBuilder.Entity("CapitalEuropeiaGuarda.Models.Veiculo", b =>
                 {
                     b.HasOne("CapitalEuropeiaGuarda.Models.Empresaaluguer", null)
                         .WithMany("Veiculo")
                         .HasForeignKey("empresaaluguerId");
-
-            modelBuilder.Entity("CapitalEuropeiaGuarda.Models.ReservaExcursao", b =>
-                {
-                    b.HasOne("CapitalEuropeiaGuarda.Models.Turista", "Turista")
-                        .WithMany("reservaexcursoes")
-                        .HasForeignKey("TuristaId");
-
-                })
+                });
+#pragma warning restore 612, 618
         }
     }
 }

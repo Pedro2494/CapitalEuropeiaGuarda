@@ -3,11 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace CapitalEuropeiaGuarda.Migrations
 {
-<<<<<<< HEAD:CapitalEuropeiaGuarda/Migrations/20210128221317_migracao28012021.cs
-    public partial class migracao28012021 : Migration
-=======
-    public partial class mig28 : Migration
->>>>>>> torres:CapitalEuropeiaGuarda/Migrations/20210128224402_mig28.cs
+    public partial class Mg1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -17,27 +13,11 @@ namespace CapitalEuropeiaGuarda.Migrations
                 {
                     empresaaluguerId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    NomeEmpresa = table.Column<string>(nullable: true),
-                    Descricao = table.Column<string>(nullable: true),
-                    Url = table.Column<string>(nullable: true),
-                    Morada = table.Column<string>(nullable: true),
+                    NomeEmpresa = table.Column<string>(nullable: false),
+                    Descricao = table.Column<string>(nullable: false),
+                    Url = table.Column<string>(nullable: false),
+                    Morada = table.Column<string>(nullable: false),
                     Photo = table.Column<byte[]>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Empresaaluguer", x => x.empresaaluguerId);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Empresaaluguer",
-                columns: table => new
-                {
-                    empresaaluguerId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    NomeEmpresa = table.Column<string>(nullable: true),
-                    Descricao = table.Column<string>(nullable: true),
-                    Url = table.Column<string>(nullable: true),
-                    Morada = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -53,11 +33,27 @@ namespace CapitalEuropeiaGuarda.Migrations
                     Nome = table.Column<string>(nullable: false),
                     DescricaoCurta = table.Column<string>(nullable: false),
                     HotelUrl = table.Column<string>(nullable: false),
-                    Local = table.Column<string>(nullable: false)
+                    Local = table.Column<string>(nullable: false),
+                    Photo = table.Column<byte[]>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Hoteis", x => x.HoteisId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Local",
+                columns: table => new
+                {
+                    localID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Nome = table.Column<string>(nullable: false),
+                    Concelho = table.Column<string>(nullable: false),
+                    Coordenadas = table.Column<string>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Local", x => x.localID);
                 });
 
             migrationBuilder.CreateTable(
@@ -77,32 +73,16 @@ namespace CapitalEuropeiaGuarda.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ReservaExcursao",
-                columns: table => new
-                {
-                    ReservaExcursaoId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    DataReserva = table.Column<string>(nullable: true),
-                    NumPessoas = table.Column<int>(nullable: false),
-                    Cancelado = table.Column<bool>(nullable: false),
-                    DataCancelar = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ReservaExcursao", x => x.ReservaExcursaoId);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Turista",
                 columns: table => new
                 {
                     TuristaId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Nome = table.Column<string>(nullable: true),
+                    Nome = table.Column<string>(nullable: false),
                     Ativo = table.Column<bool>(nullable: false),
-                    Email = table.Column<string>(nullable: true),
+                    Email = table.Column<string>(nullable: false),
                     Nif = table.Column<int>(nullable: false),
-                    Telemovel = table.Column<string>(nullable: true)
+                    Telemovel = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -115,28 +95,21 @@ namespace CapitalEuropeiaGuarda.Migrations
                 {
                     VeiculoId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Modelo = table.Column<string>(nullable: true),
-                    Marca = table.Column<string>(nullable: true),
+                    Modelo = table.Column<string>(nullable: false),
+                    Marca = table.Column<string>(nullable: false),
                     Max_lugares = table.Column<int>(nullable: false),
-<<<<<<< HEAD:CapitalEuropeiaGuarda/Migrations/20210128221317_migracao28012021.cs
                     Min_lugares = table.Column<int>(nullable: false),
                     empresaaluguerId = table.Column<int>(nullable: true)
-=======
-                    Min_lugares = table.Column<int>(nullable: false)
->>>>>>> torres:CapitalEuropeiaGuarda/Migrations/20210128224402_mig28.cs
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Veiculo", x => x.VeiculoId);
-<<<<<<< HEAD:CapitalEuropeiaGuarda/Migrations/20210128221317_migracao28012021.cs
                     table.ForeignKey(
                         name: "FK_Veiculo_Empresaaluguer_empresaaluguerId",
                         column: x => x.empresaaluguerId,
                         principalTable: "Empresaaluguer",
                         principalColumn: "empresaaluguerId",
                         onDelete: ReferentialAction.Restrict);
-=======
->>>>>>> torres:CapitalEuropeiaGuarda/Migrations/20210128224402_mig28.cs
                 });
 
             migrationBuilder.CreateTable(
@@ -145,9 +118,9 @@ namespace CapitalEuropeiaGuarda.Migrations
                 {
                     PontoInteressePorHotelId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    HotelId = table.Column<int>(nullable: false),
+                    HotelId = table.Column<int>(nullable: true),
                     HoteisId = table.Column<int>(nullable: true),
-                    PontoInteresseId = table.Column<int>(nullable: false)
+                    PontoInteresseId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -163,7 +136,30 @@ namespace CapitalEuropeiaGuarda.Migrations
                         column: x => x.PontoInteresseId,
                         principalTable: "PontoInteresse",
                         principalColumn: "PontoInteresseId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ReservaExcursao",
+                columns: table => new
+                {
+                    ReservaExcursaoId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    TuristaId = table.Column<int>(nullable: true),
+                    DataReserva = table.Column<string>(nullable: true),
+                    NumPessoas = table.Column<int>(nullable: false),
+                    Cancelado = table.Column<bool>(nullable: false),
+                    DataCancelar = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ReservaExcursao", x => x.ReservaExcursaoId);
+                    table.ForeignKey(
+                        name: "FK_ReservaExcursao_Turista_TuristaId",
+                        column: x => x.TuristaId,
+                        principalTable: "Turista",
+                        principalColumn: "TuristaId",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
@@ -177,6 +173,11 @@ namespace CapitalEuropeiaGuarda.Migrations
                 column: "PontoInteresseId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_ReservaExcursao_TuristaId",
+                table: "ReservaExcursao",
+                column: "TuristaId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Veiculo_empresaaluguerId",
                 table: "Veiculo",
                 column: "empresaaluguerId");
@@ -185,29 +186,13 @@ namespace CapitalEuropeiaGuarda.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "PontoInteressePorHotel");
-
-            migrationBuilder.DropTable(
-<<<<<<< HEAD:CapitalEuropeiaGuarda/Migrations/20210128221317_migracao28012021.cs
-                name: "ReservaExcursao");
-
-            migrationBuilder.DropTable(
-                name: "Turista");
-
-            migrationBuilder.DropTable(
-                name: "Veiculo");
-=======
-                name: "Empresaaluguer");
+                name: "Local");
 
             migrationBuilder.DropTable(
                 name: "PontoInteressePorHotel");
->>>>>>> torres:CapitalEuropeiaGuarda/Migrations/20210128224402_mig28.cs
 
             migrationBuilder.DropTable(
                 name: "ReservaExcursao");
-
-            migrationBuilder.DropTable(
-                name: "Turista");
 
             migrationBuilder.DropTable(
                 name: "Veiculo");
@@ -217,6 +202,9 @@ namespace CapitalEuropeiaGuarda.Migrations
 
             migrationBuilder.DropTable(
                 name: "PontoInteresse");
+
+            migrationBuilder.DropTable(
+                name: "Turista");
 
             migrationBuilder.DropTable(
                 name: "Empresaaluguer");
