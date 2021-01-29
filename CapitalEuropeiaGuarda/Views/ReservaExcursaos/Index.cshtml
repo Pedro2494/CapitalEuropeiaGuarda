@@ -7,11 +7,11 @@
 <h1>Index</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" class="btn btn-success btn-sm">Criar novo</a>
 </p>
 <table class="table">
     <thead>
-        <tr>
+        <tr style="background-color:#CADAFF">
             <th>
                 @Html.DisplayNameFor(model => model.DataReserva)
             </th>
@@ -29,7 +29,7 @@
     </thead>
     <tbody>
 @foreach (var item in Model) {
-        <tr>
+        <tr style="background-color:#DFE9FF">
             <td>
                 @Html.DisplayFor(modelItem => item.DataReserva)
             </td>
@@ -43,9 +43,9 @@
                 @Html.DisplayFor(modelItem => item.DataCancelar)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.ReservaExcursaoId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ReservaExcursaoId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ReservaExcursaoId">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.ReservaExcursaoId" class="btn btn-primary btn-sm">Editar</a> 
+                <a asp-action="Details" asp-route-id="@item.ReservaExcursaoId" class="btn btn-info btn-sm">Detalhes</a> 
+                <a asp-action="Delete" asp-route-id="@item.ReservaExcursaoId" class="btn btn-danger btn-sm">Eliminar</a>
             </td>
         </tr>
 }

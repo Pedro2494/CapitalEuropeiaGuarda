@@ -42,4 +42,5 @@ namespace CapitalEuropeiaGuarda.Models
             return new PaginatedList<T>(items, count, pageIndex, pageSize);
         }
     }
+
 }
