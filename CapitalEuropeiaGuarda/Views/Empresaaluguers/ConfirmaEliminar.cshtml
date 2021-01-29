@@ -1,20 +1,17 @@
 ﻿@{
     ViewData["Title"] = ViewBag.title;
 }
-@{
-    ViewData["Title"] = ViewBag.title;
-}
 
 
-<div class="main-panel view-html" style="width:100%">
+<div class="main-panel view-html" style="width:10px">
     <div class="content-wrapper">
         <div class="row">
             <div class="col">
                 <div class="alert @ViewBag.type" role="alert">
                     <br />
                     <br />
-                    <img src="~/images/edited.gif" alt="confirm">
-                    <h3 class="alert-heading">@ViewBag.title</h3>
+                    <img src="~/images/delete.gif" alt="confirm">
+                    <h3 class="alert-heading">@ViewBag.message</h3>
                     <br />
                     <br />
                 </div>

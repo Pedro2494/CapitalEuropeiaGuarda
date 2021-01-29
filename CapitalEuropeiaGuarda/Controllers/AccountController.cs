@@ -30,7 +30,7 @@ namespace CapitalEuropeiaGuarda.Controllers
             }
             ClaimsIdentity identity = null;
             bool isAuthenticate = false;
-            if (username == "torres" && password == "torres")
+            if (username == "admin" && password == "admin123")
             {
                 identity = new ClaimsIdentity(new[]
                 {
@@ -39,7 +39,7 @@ namespace CapitalEuropeiaGuarda.Controllers
                 }, CookieAuthenticationDefaults.AuthenticationScheme);
                 isAuthenticate = true;
             }
-            if (username == "torresuser" && password == "torresuser")
+            if (username == "turista" && password == "turista123")
             {
                 identity = new ClaimsIdentity(new[]
                 {

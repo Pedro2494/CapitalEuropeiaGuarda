@@ -12,7 +12,6 @@ using CapitalEuropeiaGuarda.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using CapitalEuropeiaGuarda.Models;
 using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace CapitalEuropeiaGuarda
@@ -36,13 +35,12 @@ namespace CapitalEuropeiaGuarda
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
             services.AddRazorPages();
-
+            //aqui
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie();
+            //acab
 
             services.AddDbContext<CapitalEuropeiaGuardaContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("CapitalEuropeiaGuardaContext")));
-
-            services.AddTransient<IPontosRepository, PontosFakeRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -63,7 +61,9 @@ namespace CapitalEuropeiaGuarda
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            //autenticacao aqui
+            app.UseAuthentication();
+            //acaba
             app.UseAuthentication();
             app.UseAuthorization();
 
