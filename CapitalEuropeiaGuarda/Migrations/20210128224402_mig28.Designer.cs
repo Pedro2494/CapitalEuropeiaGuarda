@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CapitalEuropeiaGuarda.Migrations
 {
     [DbContext(typeof(CapitalEuropeiaGuardaContext))]
-    [Migration("20210128001939_mig28")]
+    [Migration("20210128224402_mig28")]
     partial class mig28
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

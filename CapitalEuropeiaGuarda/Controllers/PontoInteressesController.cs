@@ -10,6 +10,7 @@ using CapitalEuropeiaGuarda.Models;
 using PagedList;
 using Microsoft.AspNetCore.Http;
 using System.IO;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CapitalEuropeiaGuarda.Controllers
 {
@@ -24,6 +25,7 @@ namespace CapitalEuropeiaGuarda.Controllers
         }
 
         // GET: PontoInteresses
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Index(string sortOrder,
         string currentFilter,
         string searchString,

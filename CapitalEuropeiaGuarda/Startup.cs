@@ -13,6 +13,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using CapitalEuropeiaGuarda.Models;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace CapitalEuropeiaGuarda
 {
@@ -35,6 +36,8 @@ namespace CapitalEuropeiaGuarda
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
             services.AddRazorPages();
+
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie();
 
             services.AddDbContext<CapitalEuropeiaGuardaContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("CapitalEuropeiaGuardaContext")));
