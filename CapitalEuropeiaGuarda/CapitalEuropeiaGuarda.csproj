@@ -30,10 +30,12 @@
 
   <ItemGroup>
     <Content Remove="Views\Home\Index1.cshtml" />
+    <Content Remove="Views\Home\ViewPontos.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Remove="Views\Index.cshtml" />
+    <Content Remove="Views\PontoInteresses\PontosView.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
