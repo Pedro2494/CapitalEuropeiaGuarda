@@ -13,7 +13,6 @@ namespace CapitalEuropeiaGuarda.Controllers
 
 
     {
-
         private readonly CapitalEuropeiaGuardaContext _context;
 
         public VerPontosController(CapitalEuropeiaGuardaContext context)
@@ -34,9 +33,8 @@ namespace CapitalEuropeiaGuarda.Controllers
 
                                }).ToList();
             ViewBag.dadosPontos = dadosPontos;
-            //acaba aqui
 
-            return View("PontosView");
+            return View("ViewPontos");
         }
 
         // GET: ViewPontosController/Details/5
