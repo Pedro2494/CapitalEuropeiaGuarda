@@ -30,7 +30,7 @@ namespace CapitalEuropeiaGuarda.Controllers
             }
             ClaimsIdentity identity = null;
             bool isAuthenticate = false;
-            if (username == "admin" && password == "admin123")
+            if (username == "admin@stayinguarda.pt" && password == "admin123")
             {
                 identity = new ClaimsIdentity(new[]
                 {
@@ -39,7 +39,7 @@ namespace CapitalEuropeiaGuarda.Controllers
                 }, CookieAuthenticationDefaults.AuthenticationScheme);
                 isAuthenticate = true;
             }
-            if (username == "turista" && password == "turista123")
+            if (username == "turista@stayinguarda.pt" && password == "turista123")
             {
                 identity = new ClaimsIdentity(new[]
                 {
