@@ -44,6 +44,12 @@ namespace CapitalEuropeiaGuarda.Controllers
             return View();
         }
 
+        //public IActionResult hoteislist()
+        //{
+        //    return View();
+        //}
+
+
         public IActionResult Covid19()
         {
             return View();

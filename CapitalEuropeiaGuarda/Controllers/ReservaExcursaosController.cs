@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using CapitalEuropeiaGuarda.Data;
 using CapitalEuropeiaGuarda.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 
 namespace CapitalEuropeiaGuarda.Controllers
 {
