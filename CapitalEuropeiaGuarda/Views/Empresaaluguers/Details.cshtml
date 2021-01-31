@@ -9,33 +9,44 @@
 <div>
     <h4>Empresa de aluguer de viaturas</h4>
     <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NomeEmpresa)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NomeEmpresa)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Descricao)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Descricao)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Url)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Url)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Morada)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Morada)
-        </dd>
-    </dl>
-</div>
+    <div class="row">
+       <div class="col-10">
+           <dl class="row">
+               <dt class="col-sm-2">
+                   @Html.DisplayNameFor(model => model.NomeEmpresa)
+               </dt>
+               <dd class="col-sm-10">
+                   @Html.DisplayFor(model => model.NomeEmpresa)
+               </dd>
+               <dt class="col-sm-2">
+                   @Html.DisplayNameFor(model => model.Descricao)
+               </dt>
+               <dd class="col-sm-10">
+                   @Html.DisplayFor(model => model.Descricao)
+               </dd>
+               <dt class="col-sm-2">
+                   @Html.DisplayNameFor(model => model.Url)
+               </dt>
+               <dd class="col-sm-10">
+                   @Html.DisplayFor(model => model.Url)
+               </dd>
+               <dt class="col-sm-2">
+                   @Html.DisplayNameFor(model => model.Morada)
+               </dt>
+               <dd class="col-sm-10">
+                   @Html.DisplayFor(model => model.Morada)
+               </dd>
+           </dl>
+        </div>
+       <div class="col-2">
+           @if (Model.Photo != null)
+           {
+               <img class="img-responsive full-width" src="data:image/jpeg;base64,@Convert.ToBase64String(Model.Photo)" />
+           }
+       </div>
+    </div>
+ </div>
+
 <div>
     <a asp-action="Edit" asp-route-id="@Model.empresaaluguerId">Editar</a> |
     <a asp-action="Index">Voltar a lista</a>

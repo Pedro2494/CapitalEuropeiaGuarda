@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CapitalEuropeiaGuarda.Migrations
 {
     [DbContext(typeof(CapitalEuropeiaGuardaContext))]
-    [Migration("20210126110449_migfoto")]
-    partial class migfoto
+    [Migration("20210129112745_Mg1")]
+    partial class Mg1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -39,6 +39,9 @@ namespace CapitalEuropeiaGuarda.Migrations
                     b.Property<string>("NomeEmpresa")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte[]>("Photo")
+                        .HasColumnType("varbinary(max)");
 
                     b.Property<string>("Url")
                         .IsRequired()
@@ -123,6 +126,9 @@ namespace CapitalEuropeiaGuarda.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(50)")
                         .HasMaxLength(50);
+
+                    b.Property<byte[]>("Photo")
+                        .HasColumnType("varbinary(max)");
 
                     b.HasKey("PontoInteresseId");
 
@@ -234,7 +240,12 @@ namespace CapitalEuropeiaGuarda.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("empresaaluguerId")
+                        .HasColumnType("int");
+
                     b.HasKey("VeiculoId");
+
+                    b.HasIndex("empresaaluguerId");
 
                     b.ToTable("Veiculo");
                 });
@@ -255,6 +266,13 @@ namespace CapitalEuropeiaGuarda.Migrations
                     b.HasOne("CapitalEuropeiaGuarda.Models.Turista", "Turista")
                         .WithMany("reservaexcursoes")
                         .HasForeignKey("TuristaId");
+                });
+
+            modelBuilder.Entity("CapitalEuropeiaGuarda.Models.Veiculo", b =>
+                {
+                    b.HasOne("CapitalEuropeiaGuarda.Models.Empresaaluguer", null)
+                        .WithMany("Veiculo")
+                        .HasForeignKey("empresaaluguerId");
                 });
 #pragma warning restore 612, 618
         }

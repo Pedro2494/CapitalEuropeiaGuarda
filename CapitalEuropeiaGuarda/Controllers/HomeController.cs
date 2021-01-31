@@ -38,8 +38,8 @@ namespace CapitalEuropeiaGuarda.Controllers
         {
             return View();
         }
-        
-        public IActionResult Manteigas()
+
+        public IActionResult ViewPontos()
         {
             return View();
         }

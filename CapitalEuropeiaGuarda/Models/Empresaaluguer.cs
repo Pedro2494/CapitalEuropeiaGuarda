@@ -24,5 +24,10 @@ namespace CapitalEuropeiaGuarda.Models
         [Required(ErrorMessage = "Insira a morada")]
         public string Morada { get; set; }
 
+        public byte[] Photo { get; set; }
+
+        public ICollection<Veiculo> Veiculo { get; set; } 
+
+
     }
 }
