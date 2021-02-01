@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CapitalEuropeiaGuarda.Migrations
 {
     [DbContext(typeof(CapitalEuropeiaGuardaContext))]
-    [Migration("20210129112745_Mg1")]
-    partial class Mg1
+    [Migration("20210131214635_mig1")]
+    partial class mig1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -170,8 +170,8 @@ namespace CapitalEuropeiaGuarda.Migrations
                     b.Property<bool>("Cancelado")
                         .HasColumnType("bit");
 
-                    b.Property<string>("DataCancelar")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime?>("DataCancelar")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("DataReserva")
                         .HasColumnType("nvarchar(max)");
