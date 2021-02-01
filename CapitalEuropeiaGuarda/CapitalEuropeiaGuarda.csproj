@@ -36,6 +36,7 @@
   <ItemGroup>
     <Content Remove="Views\Index.cshtml" />
     <Content Remove="Views\PontoInteresses\PontosView.cshtml" />
+    <Content Remove="Views\VerPontos\PontosView.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
