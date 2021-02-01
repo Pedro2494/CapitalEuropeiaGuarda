@@ -22,7 +22,7 @@ namespace CapitalEuropeiaGuarda.Controllers
         }
 
         // GET: ReservaExcursaos
-        [Authorize(Roles = "User")]
+        [Authorize(Roles = "User,Admin")]
         public async Task<IActionResult> Index()
         {
             return View(await _context.ReservaExcursao.ToListAsync());

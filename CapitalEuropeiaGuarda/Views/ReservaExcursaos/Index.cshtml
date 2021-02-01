@@ -1,53 +1,117 @@
 ﻿@model IEnumerable<CapitalEuropeiaGuarda.Models.ReservaExcursao>
 
-@{
-    ViewData["Title"] = "Index";
-}
 
-<h1>Index</h1>
+<!-- Page Content -->
+<div class="container">
 
-<p>
-    <a asp-action="Create" class="btn btn-success btn-sm">Criar novo</a>
-</p>
-<table class="table">
-    <thead>
-        <tr style="background-color:#CADAFF">
-            <th>
-                @Html.DisplayNameFor(model => model.DataReserva)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NumPessoas)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Cancelado)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DataCancelar)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr style="background-color:#DFE9FF">
-            <td>
-                @Html.DisplayFor(modelItem => item.DataReserva)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NumPessoas)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Cancelado)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DataCancelar)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.ReservaExcursaoId" class="btn btn-primary btn-sm">Editar</a> 
-                <a asp-action="Details" asp-route-id="@item.ReservaExcursaoId" class="btn btn-info btn-sm">Detalhes</a> 
-                <a asp-action="Delete" asp-route-id="@item.ReservaExcursaoId" class="btn btn-danger btn-sm">Eliminar</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+    <div class="row align-items-center my-5">
+        <div class="col-lg-7">
+            <img class="img-fluid rounded mb-4 mb-lg-0" src="~/images/exc1.jpg" alt="">
+        </div>
+        <!-- /.col-lg-8 -->
+        <div class="col-lg-5">
+            <h1 class="font-weight-light">Veja aqui as suas excursões</h1>
+            
+            <p>
+                <a asp-action="Create" class="btn btn-success btn-sm">Criar novo</a>
+            </p>
+        </div>
+        <!-- /.col-md-4 -->
+    </div>
+
+
+
+
+    @foreach (var item in Model)
+    {
+
+        <!-- Content Row -->
+        <div class="row">
+            <div class="col-md-4 mb-5">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h2 class="card-title">@Html.DisplayNameFor(model => model.DataReserva)</h2>
+                        <p class="card-text">@Html.DisplayFor(modelItem => item.DataReserva)</p>
+                        <h2 class="card-title">@Html.DisplayNameFor(model => model.NumPessoas)</h2>
+                        <p class="card-text">@Html.DisplayFor(modelItem => item.NumPessoas)</p>
+                        <h2 class="card-title">@Html.DisplayNameFor(model => model.DataCancelar)</h2>
+                        <p class="card-text">@Html.DisplayFor(modelItem => item.DataCancelar)</p>
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <td>
+                                <a asp-action="Edit" asp-route-id="@item.ReservaExcursaoId" class="btn btn-primary btn-sm">Editar</a>
+                                <a asp-action="Details" asp-route-id="@item.ReservaExcursaoId" class="btn btn-info btn-sm">Detalhes</a>
+                                <a asp-action="Delete" asp-route-id="@item.ReservaExcursaoId" class="btn btn-danger btn-sm">Eliminar</a>
+                            </td>
+                        }
+                        else if (User.IsInRole("User"))
+                        {
+                            <td>
+                                <a asp-action="Edit" asp-route-id="@item.ReservaExcursaoId" class="btn btn-primary btn-sm">Editar</a>
+                            </td>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+    }
+
+
+
+
+    @*@{
+            ViewData["Title"] = "Index";
+        }
+
+        <h1>Index</h1>
+
+        <p>
+            <a asp-action="Create" class="btn btn-success btn-sm">Criar novo</a>
+        </p>
+        <table class="table">
+            <thead>
+                <tr style="background-color:#CADAFF">
+                    <th>
+                        @Html.DisplayNameFor(model => model.DataReserva)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.NumPessoas)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Cancelado)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.DataCancelar)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+        @foreach (var item in Model) {
+                <tr style="background-color:#DFE9FF">
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DataReserva)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NumPessoas)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Cancelado)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DataCancelar)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.ReservaExcursaoId" class="btn btn-primary btn-sm">Editar</a>
+                        <a asp-action="Details" asp-route-id="@item.ReservaExcursaoId" class="btn btn-info btn-sm">Detalhes</a>
+                        <a asp-action="Delete" asp-route-id="@item.ReservaExcursaoId" class="btn btn-danger btn-sm">Eliminar</a>
+                    </td>
+                </tr>
+        }
+            </tbody>
+        </table>*@
+
+
