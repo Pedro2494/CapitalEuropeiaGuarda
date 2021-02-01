@@ -28,9 +28,7 @@ namespace CapitalEuropeiaGuarda.Models
         public bool Cancelado { get; set; }
 
         
-        [Display(Name = "Date")]
-        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
-        [DataType(DataType.Date)]
-        public string DataCancelar { get; set; }
+       
+        public DateTime? DataCancelar { get; set; }
     }
 }

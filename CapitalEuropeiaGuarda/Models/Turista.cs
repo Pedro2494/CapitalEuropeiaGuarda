@@ -24,6 +24,7 @@ namespace CapitalEuropeiaGuarda.Models
         [Required(ErrorMessage = "Introduza o numero de telemovel")]
         public string Telemovel { get; set; }
 
+
         public ICollection<ReservaExcursao> reservaexcursoes { get; set; }
     }
 }
