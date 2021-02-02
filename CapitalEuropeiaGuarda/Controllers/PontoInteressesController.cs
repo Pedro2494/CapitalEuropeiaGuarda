@@ -104,7 +104,7 @@ namespace CapitalEuropeiaGuarda.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("PontoInteresseId,Nome,Local,DescricaoCurta")] PontoInteresse pontoInteresse, IFormFile photoFile)
+        public async Task<IActionResult> Create([Bind("PontoInteresseId,Nome,Local,DescricaoCurta,Latitude,Longitude")] PontoInteresse pontoInteresse, IFormFile photoFile)
         {
             if (ModelState.IsValid)
             {

@@ -24,6 +24,8 @@
                     <h2 class="card-title">@item.Nome</h2>
                     <p class="card-text">@item.DescricaoCurta </p>
                     <p class="card-text">@item.Local </p>
+                    <p class="card-text">@item.Latitude </p>
+                    <p class="card-text">@item.Longitude </p>
 
                     <input type="button" value="Mostrar Mapa!" onClick="DisplayGoogleMap()" />
                 </div>
@@ -42,7 +44,7 @@
                 }
             </div>
         </div>
-
+        <br />
         <div class="col-md-5 mb-2">
             <div class="card h-75">
                 <script src="https://maps.googleapis.com/maps/api/js?"></script>
@@ -54,7 +56,7 @@
                     function DisplayGoogleMap() {
 
                         //Set the Latitude and Longitude of the Map
-                        var myAddress = new google.maps.LatLng(40.5371, -7.26785);
+                        var myAddress = new google.maps.LatLng(40.537504877648644, -7.271449967106774);
 
                         //Create Options or set different Characteristics of Google Map
                         var mapOptions = {

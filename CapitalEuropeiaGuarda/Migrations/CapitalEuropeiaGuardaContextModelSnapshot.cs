@@ -116,8 +116,14 @@ namespace CapitalEuropeiaGuarda.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Latitude")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Local")
                         .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Longitude")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Nome")
@@ -225,7 +231,6 @@ namespace CapitalEuropeiaGuarda.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Marca")
-
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -239,7 +244,12 @@ namespace CapitalEuropeiaGuarda.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("empresaaluguerId")
+                        .HasColumnType("int");
 
+                    b.HasKey("VeiculoId");
+
+                    b.HasIndex("empresaaluguerId");
 
                     b.ToTable("Veiculo");
                 });
@@ -268,22 +278,7 @@ namespace CapitalEuropeiaGuarda.Migrations
                         .WithMany("Veiculo")
                         .HasForeignKey("empresaaluguerId");
                 });
-
-
-            modelBuilder.Entity("CapitalEuropeiaGuarda.Models.Veiculo", b =>
-                {
-                    b.HasOne("CapitalEuropeiaGuarda.Models.Empresaaluguer", null)
-                        .WithMany("Veiculo")
-                        .HasForeignKey("empresaaluguerId");
-
-                    modelBuilder.Entity("CapitalEuropeiaGuarda.Models.ReservaExcursao", b =>
-                        {
-                            b.HasOne("CapitalEuropeiaGuarda.Models.Turista", "Turista")
-                                .WithMany("reservaexcursoes")
-                                .HasForeignKey("TuristaId");
-
-                        });
-                });
+#pragma warning restore 612, 618
         }
     }
 }

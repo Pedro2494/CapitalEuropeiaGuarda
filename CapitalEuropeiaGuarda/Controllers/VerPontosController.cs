@@ -30,6 +30,8 @@ namespace CapitalEuropeiaGuarda.Controllers
                                    DescricaoCurta = b.DescricaoCurta,
                                    Local = b.Local,
                                    Photo = b.Photo
+                                   //Latitude = b.Latitude,
+                                   //Longitude = b.Longitude
 
                                }).ToList();
             ViewBag.dadosPontos = dadosPontos;
