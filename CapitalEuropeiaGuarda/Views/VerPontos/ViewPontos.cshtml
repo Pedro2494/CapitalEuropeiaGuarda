@@ -1,118 +1,161 @@
 ﻿@model IEnumerable<CapitalEuropeiaGuarda.Models.PontoInteresse>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDJ3uSReognn-H6O-FFITlBuL28iWo_vAo"></script>
+<script src="https://maps.googleapis.com/maps/api/js?"></script>
 
 <div class="container">
 
-
-    <div class="row align-items-center my-5">
-        <div class="col-lg-5">
-            <h1 class="font-weight-light">Pontos de Interesse</h1>
-            <p>O que visitar?</p>
+    
+        <div class="row align-items-center my-5">
+            <div class="col-lg-5">
+                <h1 class="font-weight-light">Pontos de Interesse</h1>
+                <p>O que visitar?</p>
+            </div>
         </div>
-    </div>
-
+    
+    
 
     @foreach (var item in ViewBag.dadosPontos)
     {
 
-        <div class="row">
-            <div class="col-md-4 mb-4">
-                <div class="card h-40">
-                    <div class="card-body">
-                        <h2 class="card-title">@item.Nome</h2>
-                        <p class="card-text">@item.DescricaoCurta </p>
-                        <p class="card-text">@item.Local </p>
-                    </div>
-                </div>
-            </div>
+    <div class="row">
+        <div class="col-md-4 mb-4">
+            <div class="card h-40">
+                <div class="card-body">
+                    <h2 class="card-title">@item.Nome</h2>
+                    <p class="card-text">@item.DescricaoCurta </p>
+                    <p class="card-text">@item.Local </p>
 
-            <div class="col-md-2 mb-1">
-                <div class="card h-75">
-                    @if (item.Photo != null)
-                    {
-                        <img style="height: 300px; width:300px;" class="img-responsive full-width" src="data:image/jpeg;base64,@Convert.ToBase64String(item.Photo)" />
-                    }
-                    else
-                    {
-                        <img style="height: 300px; width:300px;" class="img-responsive full-width" src="~/images/notfound.gif" />
-                    }
+                    <input type="button" value="Mostrar Mapa!" onClick="DisplayGoogleMap()" />
                 </div>
             </div>
         </div>
 
-        @*<div class="col-md-2 mb-1">
+        <div class="col-md-3 mb-3">
             <div class="card h-75">
-                <script type='text/javascript'>
-
-    function loadMapScenario() {
-        var map = new Microsoft.Maps.Map(document.getElementById('myMap'), {
-            credentials: And9ITIBuxn6Yo2IrfK8BdRw1qPNQHi3iBawMcmqThfrS96Gb0H_DgF - ZDyQYOwc,
-            mapTypeId: Microsoft.Maps.MapTypeId.road,
-            zoom: 5
-        });
-
-        // Create the infobox for the pushpin
-        var infobox = null;
-
-        //declare addMarker function
-        function addMarker(latitude, longitude)
-        {
-            var marker = new Microsoft.Maps.Pushpin(new Microsoft.Maps.Location(latitude, longitude), { color: 'green' });
-
-            infobox = new Microsoft.Maps.Infobox(marker.getLocation(), {
-                visible : false
-            });
-
-            marker.metadata = {
-                id: pid,
-                title: title,
-                description: description
-            };
-
-            Microsoft.Maps.Events.addHandler(marker, 'mouseout', hideInfobox);
-            Microsoft.Maps.Events.addHandler(marker, 'mouseover', showInfobox);
-
-            infobox.setMap(map);
-            map.entities.push(marker);
-            marker.setOptions({ enableHoverStyle: true });
-        };
-
-        function showInfobox(e) {
-            if (e.target.metadata) {
-                infobox.setOptions({
-                    location: e.target.getLocation(),
-                    title: e.target.metadata.title,
-                    description: e.target.metadata.description,
-                    visible: true
-                });
-            }
-        }
-
-        function hideInfobox(e) {
-            infobox.setOptions({ visible: false });
-        }
-
-        //add markers to map
-        @if (Model.PontoInteresse != null)
-        {
-            foreach (var item in Model.PontoInteresse)
-            {
-                @:addMarker(@item.Latitude, @item.Longitude);
-            }
-        }
-    }
-                </script>
-                <script type='text/javascript' src='http://www.bing.com/api/maps/mapcontrol?branch=release&callback=loadMapScenario' async defer></script>
-
-                <div class="jumbotron">
-                    <h2>MAP INTEGRATION</h2>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-12 map">
-                        <div id="myMap" style="width:100%; height:610px;"></div>
-                    </div>
-                </div>
+                @if (item.Photo != null)
+                {
+                    <img style="height: 300px; width:300px;" class="img-responsive full-width" src="data:image/jpeg;base64,@Convert.ToBase64String(item.Photo)" />
+                }
+                else
+                {
+                    <img style="height: 300px; width:300px;" class="img-responsive full-width" src="~/images/notfound.gif" />
+                }
             </div>
-        </div>*@
+        </div>
+
+        <div class="col-md-5 mb-2">
+            <div class="card h-75">
+                <script src="https://maps.googleapis.com/maps/api/js?"></script>
+
+
+                <div id="myDiv" center="right" style="width:80%;height:250px;"></div>
+
+                <script type="text/javascript">
+                    function DisplayGoogleMap() {
+
+                        //Set the Latitude and Longitude of the Map
+                        var myAddress = new google.maps.LatLng(40.5371, -7.26785);
+
+                        //Create Options or set different Characteristics of Google Map
+                        var mapOptions = {
+                            center: myAddress,
+                            zoom: 15,
+                            minZoom: 15,
+                            mapTypeId: google.maps.MapTypeId.SATELLITE
+                        };
+
+                        //Display the Google map in the div control with the defined Options
+                        var map = new google.maps.Map(document.getElementById("myDiv"), mapOptions);
+
+                        //Set Marker on the Map
+                        var marker = new google.maps.Marker({
+                            position: myAddress,
+                            animation: google.maps.Animation.BOUNCE,
+                        });
+
+                        marker.setMap(map);
+                    }
+                </script>
+            </div>
+            </div>
+
+        </div>
+
+
+
+
+        @*<script type='text/javascript'>
+
+            function loadMapScenario() {
+                var map = new Microsoft.Maps.Map(document.getElementById('myMap'), {
+                    credentials: And9ITIBuxn6Yo2IrfK8BdRw1qPNQHi3iBawMcmqThfrS96Gb0H_DgF - ZDyQYOwc,
+                    mapTypeId: Microsoft.Maps.MapTypeId.road,
+                    zoom: 5
+                });
+
+                // Create the infobox for the pushpin
+                var infobox = null;
+
+                //declare addMarker function
+                function addMarker(latitude, longitude)
+                {
+                    var marker = new Microsoft.Maps.Pushpin(new Microsoft.Maps.Location(latitude, longitude), { color: 'green' });
+
+                    infobox = new Microsoft.Maps.Infobox(marker.getLocation(), {
+                        visible : false
+                    });
+
+                    marker.metadata = {
+                        id: pid,
+                        title: title,
+                        description: description
+                    };
+
+                    Microsoft.Maps.Events.addHandler(marker, 'mouseout', hideInfobox);
+                    Microsoft.Maps.Events.addHandler(marker, 'mouseover', showInfobox);
+
+                    infobox.setMap(map);
+                    map.entities.push(marker);
+                    marker.setOptions({ enableHoverStyle: true });
+                };
+
+                function showInfobox(e) {
+                    if (e.target.metadata) {
+                        infobox.setOptions({
+                            location: e.target.getLocation(),
+                            title: e.target.metadata.title,
+                            description: e.target.metadata.description,
+                            visible: true
+                        });
+                    }
+                }
+
+                function hideInfobox(e) {
+                    infobox.setOptions({ visible: false });
+                }
+
+                //add markers to map
+                @if (Model.PontoInteresse != null)
+                {
+                    foreach (var item in Model.PontoInteresse)
+                    {
+                        @:addMarker(@item.Latitude, @item.Longitude);
+                    }
+                }
+            }
+                        </script>
+                        <script type='text/javascript' src='http://www.bing.com/api/maps/mapcontrol?branch=release&callback=loadMapScenario' async defer></script>
+
+                        <div class="jumbotron">
+                            <h2>MAP INTEGRATION</h2>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12 map">
+                                <div id="myMap" style="width:100%; height:610px;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>*@
     }
 </div>
