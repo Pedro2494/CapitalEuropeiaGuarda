@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CapitalEuropeiaGuarda.Migrations
 {
     [DbContext(typeof(CapitalEuropeiaGuardaContext))]
-    [Migration("20210131214635_mig1")]
-    partial class mig1
+    [Migration("20210202094335_Migra1")]
+    partial class Migra1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -176,6 +176,9 @@ namespace CapitalEuropeiaGuarda.Migrations
                     b.Property<string>("DataReserva")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Nome")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("NumPessoas")
                         .HasColumnType("int");
 
@@ -199,6 +202,10 @@ namespace CapitalEuropeiaGuarda.Migrations
                     b.Property<bool>("Ativo")
                         .HasColumnType("bit");
 
+                    b.Property<string>("ConfirmarPassword")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -207,6 +214,10 @@ namespace CapitalEuropeiaGuarda.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Password")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -263,7 +274,7 @@ namespace CapitalEuropeiaGuarda.Migrations
 
             modelBuilder.Entity("CapitalEuropeiaGuarda.Models.ReservaExcursao", b =>
                 {
-                    b.HasOne("CapitalEuropeiaGuarda.Models.Turista", "Turista")
+                    b.HasOne("CapitalEuropeiaGuarda.Models.Turista", null)
                         .WithMany("reservaexcursoes")
                         .HasForeignKey("TuristaId");
                 });
