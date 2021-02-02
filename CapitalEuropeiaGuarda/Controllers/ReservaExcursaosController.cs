@@ -91,7 +91,7 @@ namespace CapitalEuropeiaGuarda.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ReservaExcursaoId,DataReserva,NumPessoas,Cancelado,DataCancelar")] ReservaExcursao reservaExcursao)
+        public async Task<IActionResult> Create([Bind("ReservaExcursaoId,Nome,DataReserva,NumPessoas,Cancelado,DataCancelar")] ReservaExcursao reservaExcursao)
         {
             if (ModelState.IsValid)
             {
@@ -136,7 +136,7 @@ namespace CapitalEuropeiaGuarda.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ReservaExcursaoId,DataReserva,NumPessoas,Cancelado,DataCancelar")] ReservaExcursao reservaExcursao)
+        public async Task<IActionResult> Edit(int id, [Bind("ReservaExcursaoId,Nome,DataReserva,NumPessoas,Cancelado,DataCancelar")] ReservaExcursao reservaExcursao)
         {
             if (id != reservaExcursao.ReservaExcursaoId)
             {
