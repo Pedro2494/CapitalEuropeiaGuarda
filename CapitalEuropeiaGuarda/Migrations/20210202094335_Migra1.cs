@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace CapitalEuropeiaGuarda.Migrations
 {
-    public partial class mig1 : Migration
+    public partial class Migra1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -82,7 +82,9 @@ namespace CapitalEuropeiaGuarda.Migrations
                     Ativo = table.Column<bool>(nullable: false),
                     Email = table.Column<string>(nullable: false),
                     Nif = table.Column<int>(nullable: false),
-                    Telemovel = table.Column<string>(nullable: false)
+                    Telemovel = table.Column<string>(nullable: false),
+                    Password = table.Column<string>(nullable: false),
+                    ConfirmarPassword = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -145,11 +147,12 @@ namespace CapitalEuropeiaGuarda.Migrations
                 {
                     ReservaExcursaoId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    TuristaId = table.Column<int>(nullable: true),
+                    Nome = table.Column<string>(nullable: true),
                     DataReserva = table.Column<string>(nullable: true),
                     NumPessoas = table.Column<int>(nullable: false),
                     Cancelado = table.Column<bool>(nullable: false),
-                    DataCancelar = table.Column<DateTime>(nullable: true)
+                    DataCancelar = table.Column<DateTime>(nullable: true),
+                    TuristaId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
