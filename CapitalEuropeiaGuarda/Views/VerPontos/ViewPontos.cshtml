@@ -9,11 +9,11 @@
             <p>O que visitar?</p>
         </div>
     </div>
-    
+
 
     @foreach (var item in ViewBag.dadosPontos)
     {
-        
+
         <div class="row">
             <div class="col-md-4 mb-4">
                 <div class="card h-40">
@@ -35,9 +35,84 @@
                     {
                         <img style="height: 300px; width:300px;" class="img-responsive full-width" src="~/images/notfound.gif" />
                     }
+                </div>
+            </div>
+        </div>
+
+        @*<div class="col-md-2 mb-1">
+            <div class="card h-75">
+                <script type='text/javascript'>
+
+    function loadMapScenario() {
+        var map = new Microsoft.Maps.Map(document.getElementById('myMap'), {
+            credentials: And9ITIBuxn6Yo2IrfK8BdRw1qPNQHi3iBawMcmqThfrS96Gb0H_DgF - ZDyQYOwc,
+            mapTypeId: Microsoft.Maps.MapTypeId.road,
+            zoom: 5
+        });
+
+        // Create the infobox for the pushpin
+        var infobox = null;
+
+        //declare addMarker function
+        function addMarker(latitude, longitude)
+        {
+            var marker = new Microsoft.Maps.Pushpin(new Microsoft.Maps.Location(latitude, longitude), { color: 'green' });
+
+            infobox = new Microsoft.Maps.Infobox(marker.getLocation(), {
+                visible : false
+            });
+
+            marker.metadata = {
+                id: pid,
+                title: title,
+                description: description
+            };
+
+            Microsoft.Maps.Events.addHandler(marker, 'mouseout', hideInfobox);
+            Microsoft.Maps.Events.addHandler(marker, 'mouseover', showInfobox);
+
+            infobox.setMap(map);
+            map.entities.push(marker);
+            marker.setOptions({ enableHoverStyle: true });
+        };
+
+        function showInfobox(e) {
+            if (e.target.metadata) {
+                infobox.setOptions({
+                    location: e.target.getLocation(),
+                    title: e.target.metadata.title,
+                    description: e.target.metadata.description,
+                    visible: true
+                });
+            }
+        }
+
+        function hideInfobox(e) {
+            infobox.setOptions({ visible: false });
+        }
+
+        //add markers to map
+        @if (Model.PontoInteresse != null)
+        {
+            foreach (var item in Model.PontoInteresse)
+            {
+                @:addMarker(@item.Latitude, @item.Longitude);
+            }
+        }
+    }
+                </script>
+                <script type='text/javascript' src='http://www.bing.com/api/maps/mapcontrol?branch=release&callback=loadMapScenario' async defer></script>
+
+                <div class="jumbotron">
+                    <h2>MAP INTEGRATION</h2>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12 map">
+                        <div id="myMap" style="width:100%; height:610px;"></div>
                     </div>
                 </div>
             </div>
-            
+        </div>*@
     }
 </div>

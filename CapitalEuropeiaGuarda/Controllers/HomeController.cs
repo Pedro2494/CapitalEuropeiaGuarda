@@ -9,7 +9,7 @@ using CapitalEuropeiaGuarda.Models;
 using System.Data.SqlClient;
 using Microsoft.Data.SqlClient;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+
 
 namespace CapitalEuropeiaGuarda.Controllers
 {
