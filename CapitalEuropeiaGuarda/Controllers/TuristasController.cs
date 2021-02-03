@@ -21,7 +21,7 @@ namespace CapitalEuropeiaGuarda.Controllers
         }
 
         // GET: Turistas
-        [Authorize(Roles = "Admin")]
+        
         public async Task<IActionResult> Index()
         {
             return View(await _context.Turista.ToListAsync());
@@ -65,7 +65,7 @@ namespace CapitalEuropeiaGuarda.Controllers
 
                 ViewBag.title = "Turista adicionado com sucesso";
                 ViewBag.type = "alert-sucess";
-                ViewBag.redirect = "/turistas/Index"; //vai para pagInicial
+                ViewBag.redirect = "/home/Index"; //vai para pagInicial
 
                 // todo: inform the user that the author was successfully created              
                 return View("Confirmacao");

@@ -171,10 +171,13 @@ namespace CapitalEuropeiaGuarda.Migrations
                     b.Property<bool>("Cancelado")
                         .HasColumnType("bit");
 
-                    b.Property<string>("DataCancelar")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime?>("DataCancelar")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("DataReserva")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Nome")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("NumPessoas")
@@ -200,6 +203,10 @@ namespace CapitalEuropeiaGuarda.Migrations
                     b.Property<bool>("Ativo")
                         .HasColumnType("bit");
 
+                    b.Property<string>("ConfirmarPassword")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -208,6 +215,10 @@ namespace CapitalEuropeiaGuarda.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Password")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -244,6 +255,7 @@ namespace CapitalEuropeiaGuarda.Migrations
                     b.Property<int?>("empresaaluguerId")
                         .HasColumnType("int");
 
+
                     b.HasKey("VeiculoId");
 
                     b.HasIndex("empresaaluguerId");
@@ -264,7 +276,7 @@ namespace CapitalEuropeiaGuarda.Migrations
 
             modelBuilder.Entity("CapitalEuropeiaGuarda.Models.ReservaExcursao", b =>
                 {
-                    b.HasOne("CapitalEuropeiaGuarda.Models.Turista", "Turista")
+                    b.HasOne("CapitalEuropeiaGuarda.Models.Turista", null)
                         .WithMany("reservaexcursoes")
                         .HasForeignKey("TuristaId");
                 });

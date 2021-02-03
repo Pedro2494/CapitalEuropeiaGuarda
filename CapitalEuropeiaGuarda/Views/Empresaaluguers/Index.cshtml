@@ -7,7 +7,7 @@
 <h1>Index</h1>
 
 <p>
-   <a asp-action="Create">Criar novo</a>
+    <a asp-action="Create" class="btn btn-success btn-sm">Adicionar nova Empresa</a>
 </p>
 
 <form asp-action="Index" method="get">
@@ -15,7 +15,7 @@
         <p>
             Procurar por nome:  <input type="text" name="SearchString" value="@ViewData["CurrentFilter"]" />
             <input type="submit" value="Procurar" class="btn btn-default" /> |
-            <a asp-action="Index">Voltar à lista completa</a>
+            <a asp-action="Index" class="btn btn-primary btn-sm">Voltar a lista inicial</a>
         </p>
     </div>
 </form>
@@ -57,9 +57,9 @@
                     @Html.DisplayFor(modelItem => item.Morada)
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.empresaaluguerId">Editar</a> |
-                    <a asp-action="Details" asp-route-id="@item.empresaaluguerId">Detalhes</a> |
-                    <a asp-action="Delete" asp-route-id="@item.empresaaluguerId">Apagar</a>
+                    <a asp-action="Edit" asp-route-id="@item.empresaaluguerId" class="btn btn-primary btn-sm">Editar</a>
+                    <a asp-action="Details" asp-route-id="@item.empresaaluguerId" class="btn btn-info btn-sm">Detalhes</a>
+                    <a asp-action="Delete" asp-route-id="@item.empresaaluguerId" class="btn btn-danger btn-sm">Eliminar</a>
                 </td>
             </tr>
         }
