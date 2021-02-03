@@ -80,7 +80,8 @@ namespace CapitalEuropeiaGuarda.Controllers
                     break;
             }
             int pageSize = 3;
-            return View(await PaginatedList<Hoteis>.CreateAsync(hoteis.AsNoTracking(), pageNumber ?? 1, pageSize));
+
+           return View(await PaginatedList<Hoteis>.CreateAsync(hoteis.AsNoTracking(), pageNumber ?? 1, pageSize));
 
             //return View(hoteis.ToList());
         }

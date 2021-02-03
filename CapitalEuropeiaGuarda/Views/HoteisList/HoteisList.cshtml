@@ -1,0 +1,47 @@
+﻿@model IEnumerable<CapitalEuropeiaGuarda.Models.Hoteis>
+<!-- Page Content -->
+<div class="container">
+
+    <!-- Heading Row -->
+    <div class="row align-items-center my-5">
+        <div class="col-lg-7">
+            <img class="img-fluid rounded mb-4 mb-lg-0" src="~/images/hotelspa.jpg" alt="">
+        </div>
+        <!-- /.col-lg-8 -->
+        <div class="col-lg-5">
+            <h1 class="font-weight-light">Hoteis</h1>
+            <p>Os melhores hoteis para a sua estdia na beira interior!</p>      
+        </div>
+        <!-- /.col-md-4 -->
+    </div>
+    <!-- /.row -->
+
+
+    @foreach (var item in ViewBag.dadosHoteis)
+    {
+        <!-- Content Row -->
+    <div class="row">
+        <div class="col-md-4 mb-5">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h2 class="card-title">@item.Nome</h2>
+                    <p class="card-text">@item.DescricaoCurta </p>
+                    <p class="card-text">@item.HotelUrl </p>
+                    <p class="card-text">@item.Local </p>
+
+                    @if (item.Photo != null)
+                    {
+                        <img style="height: 300px; width:300px;" class="img-responsive full-width" src="data:image/jpeg;base64,@Convert.ToBase64String(item.Photo)" />
+                    }
+                    else
+                    {
+                        <img style="height: 300px; width:300px;" class="img-responsive full-width" src="~/images/notfound.gif" />
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+    }
+</div>
+

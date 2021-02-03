@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CapitalEuropeiaGuarda.Data;
 using CapitalEuropeiaGuarda.Models;
+using PagedList;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using System.IO;
 
@@ -23,6 +25,7 @@ namespace CapitalEuropeiaGuarda.Controllers
         }
 
         // GET: Empresaaluguers
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Index(string sortOrder, string searchString, string currentFilter, int? pageNumber)
         {
             ViewData["NomeEmpresaSortParm"] = String.IsNullOrEmpty(sortOrder) ? "nomeempresa_desc" : "";

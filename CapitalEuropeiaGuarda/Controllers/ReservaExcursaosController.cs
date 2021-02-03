@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using CapitalEuropeiaGuarda.Data;
 using CapitalEuropeiaGuarda.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 
 namespace CapitalEuropeiaGuarda.Controllers
 {
@@ -21,10 +22,44 @@ namespace CapitalEuropeiaGuarda.Controllers
         }
 
         // GET: ReservaExcursaos
-        [Authorize(Roles = "User")]
-        public async Task<IActionResult> Index()
+        [Authorize(Roles = "User,Admin")]
+        public async Task<IActionResult> Index(string sortOrder,
+        string currentFilter,
+        string searchString,
+        int? pageNumber)
         {
-            return View(await _context.ReservaExcursao.ToListAsync());
+
+            ViewData["CurrentSort"] = sortOrder;
+
+            ViewData["NomeSortParm"] = String.IsNullOrEmpty(sortOrder) ? "nome_desc" : "";
+            ViewData["DataSortParm"] = String.IsNullOrEmpty(sortOrder) ? "data_desc" : "";
+            ViewData["NumPessoasSortParm"] = String.IsNullOrEmpty(sortOrder) ? "numpessoas_desc" : "";
+            ViewData["DataCSortParm"] = String.IsNullOrEmpty(sortOrder) ? "dataC_desc" : "";
+
+            ViewData["CurrentFilter"] = searchString;
+
+            if (searchString != null)
+            {
+                pageNumber = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            var Excursoes = from s in _context.ReservaExcursao
+                         select s;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                Excursoes = Excursoes.Where(s => s.Nome.Contains(searchString)
+                                || s.DataReserva.Contains(searchString));
+            }
+
+            int pageSize = 2;
+
+            return View(await PaginatedList<ReservaExcursao>.CreateAsync(Excursoes.AsNoTracking(), pageNumber ?? 1, pageSize));
+
+            // return View(await _context.ReservaExcursao.ToListAsync());
         }
 
         // GET: ReservaExcursaos/Details/5
@@ -56,7 +91,7 @@ namespace CapitalEuropeiaGuarda.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ReservaExcursaoId,DataReserva,NumPessoas,Cancelado,DataCancelar")] ReservaExcursao reservaExcursao)
+        public async Task<IActionResult> Create([Bind("ReservaExcursaoId,Nome,DataReserva,NumPessoas,Cancelado,DataCancelar")] ReservaExcursao reservaExcursao)
         {
             if (ModelState.IsValid)
             {
@@ -101,7 +136,7 @@ namespace CapitalEuropeiaGuarda.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ReservaExcursaoId,DataReserva,NumPessoas,Cancelado,DataCancelar")] ReservaExcursao reservaExcursao)
+        public async Task<IActionResult> Edit(int id, [Bind("ReservaExcursaoId,Nome,DataReserva,NumPessoas,Cancelado,DataCancelar")] ReservaExcursao reservaExcursao)
         {
             if (id != reservaExcursao.ReservaExcursaoId)
             {

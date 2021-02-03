@@ -12,7 +12,7 @@ namespace CapitalEuropeiaGuarda.Models
 
         // chave estrangeira IdTurista
         //public int TuristaId { get; set; }
-        public Turista Turista { get; set; }
+        public string Nome { get; set; }
 
         
         [Display(Name = "Date")]
@@ -26,11 +26,9 @@ namespace CapitalEuropeiaGuarda.Models
         public int NumPessoas { get; set; }
 
         public bool Cancelado { get; set; }
+   
+        public DateTime? DataCancelar { get; set; }
 
-        
-        [Display(Name = "Date")]
-        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
-        [DataType(DataType.Date)]
-        public string DataCancelar { get; set; }
+
     }
 }

@@ -27,7 +27,12 @@
             <th>
                 @Html.DisplayNameFor(model => model.Telemovel)
             </th>
-            <th></th>
+            <th>
+                @Html.DisplayNameFor(model => model.Password)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ConfirmarPassword)
+            </th>
         </tr>
     </thead>
     <tbody>
@@ -49,8 +54,14 @@
                 @Html.DisplayFor(modelItem => item.Telemovel)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.TuristaId" class="btn btn-primary btn-sm">Editar</a> 
-                <a asp-action="Details" asp-route-id="@item.TuristaId" class="btn btn-info btn-sm">Detalhes</a> 
+                @Html.DisplayFor(modelItem => item.Password)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ConfirmarPassword)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.TuristaId" class="btn btn-primary btn-sm">Editar</a>
+                <a asp-action="Details" asp-route-id="@item.TuristaId" class="btn btn-info btn-sm">Detalhes</a>
                 <a asp-action="Delete" asp-route-id="@item.TuristaId" class="btn btn-danger btn-sm">Eliminar</a>
             </td>
         </tr>
