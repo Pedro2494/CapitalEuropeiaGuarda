@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CapitalEuropeiaGuarda.Migrations
 {
     [DbContext(typeof(CapitalEuropeiaGuardaContext))]
-    [Migration("20210202094335_Migra1")]
+    [Migration("20210203154727_Migra1")]
     partial class Migra1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -128,6 +128,9 @@ namespace CapitalEuropeiaGuarda.Migrations
                         .HasMaxLength(50);
 
                     b.Property<byte[]>("Photo")
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<byte[]>("Photo2")
                         .HasColumnType("varbinary(max)");
 
                     b.HasKey("PontoInteresseId");

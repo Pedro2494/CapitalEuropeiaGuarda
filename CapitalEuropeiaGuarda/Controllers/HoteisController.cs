@@ -86,8 +86,59 @@ namespace CapitalEuropeiaGuarda.Controllers
             //return View(hoteis.ToList());
         }
 
-        // GET: Hoteis/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Index2HotelList(string sortOrder,
+       string currentFilter,
+       string searchString,
+       int? pageNumber)
+        {
+            ViewData["CurrentSort"] = sortOrder;
+
+            ViewData["NomeSortParm"] = String.IsNullOrEmpty(sortOrder) ? "nome_desc" : "";
+            ViewData["DescricaoCurtaSortParm"] = String.IsNullOrEmpty(sortOrder) ? "descricaocurta_desc" : "";
+            ViewData["HotelUrlSortParm"] = String.IsNullOrEmpty(sortOrder) ? "hotelurl_desc" : "";
+            ViewData["LocalSortParm"] = String.IsNullOrEmpty(sortOrder) ? "local_desc" : "";
+
+            ViewData["CurrentFilter"] = searchString;
+
+            if (searchString != null)
+            {
+                pageNumber = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            var hoteis = from s in _context.Hoteis
+                         select s;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                hoteis = hoteis.Where(s => s.Nome.Contains(searchString)
+                                || s.DescricaoCurta.Contains(searchString));
+            }
+
+            switch (sortOrder)
+            {
+                case "nome_desc":
+                    hoteis = hoteis.OrderByDescending(s => s.Nome);
+                    break;
+                case "descricaocurta_desc":
+                    hoteis = hoteis.OrderByDescending(s => s.DescricaoCurta);
+                    break;
+                case "hotelurl_desc":
+                    hoteis = hoteis.OrderByDescending(s => s.HotelUrl);
+                    break;
+                case "local_desc":
+                    hoteis = hoteis.OrderByDescending(s => s.Local);
+                    break;
+            }
+            int pageSize = 3;
+
+            return View(await PaginatedList<Hoteis>.CreateAsync(hoteis.AsNoTracking(), pageNumber ?? 1, pageSize));
+        }
+            // GET: Hoteis/Details/5
+            public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
             {

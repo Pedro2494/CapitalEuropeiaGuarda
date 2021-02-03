@@ -255,7 +255,6 @@ namespace CapitalEuropeiaGuarda.Migrations
                     b.Property<int?>("empresaaluguerId")
                         .HasColumnType("int");
 
-
                     b.HasKey("VeiculoId");
 
                     b.HasIndex("empresaaluguerId");

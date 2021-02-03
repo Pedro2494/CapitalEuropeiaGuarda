@@ -65,7 +65,8 @@ namespace CapitalEuropeiaGuarda.Migrations
                     Nome = table.Column<string>(maxLength: 50, nullable: false),
                     Local = table.Column<string>(nullable: false),
                     DescricaoCurta = table.Column<string>(nullable: false),
-                    Photo = table.Column<byte[]>(nullable: true)
+                    Photo = table.Column<byte[]>(nullable: true),
+                    Photo2 = table.Column<byte[]>(nullable: true)
                 },
                 constraints: table =>
                 {
