@@ -71,6 +71,51 @@ namespace CapitalEuropeiaGuarda.Controllers
             return View(await PaginatedList<Empresaaluguer>.CreateAsync(empresaaluguer.AsNoTracking(), pageNumber ?? 1, pageSize));
         }
 
+        public async Task<IActionResult> Index2(string sortOrder, string searchString, string currentFilter, int? pageNumber)
+        {
+            ViewData["NomeEmpresaSortParm"] = String.IsNullOrEmpty(sortOrder) ? "nomeempresa_desc" : "";
+            ViewData["DescricaoSortParm"] = String.IsNullOrEmpty(sortOrder) ? "descricao_desc" : "";
+            ViewData["UrlSortParm"] = String.IsNullOrEmpty(sortOrder) ? "url_desc" : "";
+            ViewData["MoradaSortParm"] = String.IsNullOrEmpty(sortOrder) ? "morada_desc" : "";
+            ViewData["CurrentFilter"] = searchString;
+            ViewData["CurrentSort"] = sortOrder;
+
+            var empresaaluguer = from s in _context.Empresaaluguer
+                                 select s;
+
+            if (searchString != null)
+            {
+                pageNumber = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                empresaaluguer = empresaaluguer.Where(s => s.NomeEmpresa.Contains(searchString) || s.Descricao.Contains(searchString)
+                                                        || s.Url.Contains(searchString) || s.Morada.Contains(searchString));
+            }
+            switch (sortOrder)
+            {
+                case "nomeempresa_desc":
+                    empresaaluguer = empresaaluguer.OrderByDescending(s => s.NomeEmpresa);
+                    break;
+                case "descricao_desc":
+                    empresaaluguer = empresaaluguer.OrderByDescending(s => s.Descricao);
+                    break;
+                case "url_desc":
+                    empresaaluguer = empresaaluguer.OrderByDescending(s => s.Url);
+                    break;
+                case "morada_desc":
+                    empresaaluguer = empresaaluguer.OrderByDescending(s => s.Morada);
+                    break;
+            }
+            int pageSize = 3;
+            return View(await PaginatedList<Empresaaluguer>.CreateAsync(empresaaluguer.AsNoTracking(), pageNumber ?? 1, pageSize));
+        }
+
         // GET: Empresaaluguers/Details/5
         public async Task<IActionResult> Details(int? id)
         {
