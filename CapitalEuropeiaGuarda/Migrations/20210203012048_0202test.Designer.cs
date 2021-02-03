@@ -4,14 +4,16 @@ using CapitalEuropeiaGuarda.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CapitalEuropeiaGuarda.Migrations
 {
     [DbContext(typeof(CapitalEuropeiaGuardaContext))]
-    partial class CapitalEuropeiaGuardaContextModelSnapshot : ModelSnapshot
+    [Migration("20210203012048_0202test")]
+    partial class _0202test
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -171,13 +173,10 @@ namespace CapitalEuropeiaGuarda.Migrations
                     b.Property<bool>("Cancelado")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime?>("DataCancelar")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("DataReserva")
+                    b.Property<string>("DataCancelar")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Nome")
+                    b.Property<string>("DataReserva")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("NumPessoas")
@@ -203,10 +202,6 @@ namespace CapitalEuropeiaGuarda.Migrations
                     b.Property<bool>("Ativo")
                         .HasColumnType("bit");
 
-                    b.Property<string>("ConfirmarPassword")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -215,10 +210,6 @@ namespace CapitalEuropeiaGuarda.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Nome")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Password")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -255,7 +246,6 @@ namespace CapitalEuropeiaGuarda.Migrations
                     b.Property<int?>("empresaaluguerId")
                         .HasColumnType("int");
 
-
                     b.HasKey("VeiculoId");
 
                     b.HasIndex("empresaaluguerId");
@@ -276,7 +266,7 @@ namespace CapitalEuropeiaGuarda.Migrations
 
             modelBuilder.Entity("CapitalEuropeiaGuarda.Models.ReservaExcursao", b =>
                 {
-                    b.HasOne("CapitalEuropeiaGuarda.Models.Turista", null)
+                    b.HasOne("CapitalEuropeiaGuarda.Models.Turista", "Turista")
                         .WithMany("reservaexcursoes")
                         .HasForeignKey("TuristaId");
                 });

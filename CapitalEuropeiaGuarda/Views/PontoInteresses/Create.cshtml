@@ -7,7 +7,7 @@
 
 <h1>Criar</h1>
 
-<h4>Ponto Interesse</h4>
+<h4>Novo Local de Interesse</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -19,10 +19,10 @@
                 <span asp-validation-for="Nome" class="text-danger"></span>
             </div>
             @*<div class="form-group">
-                <label asp-for="Local" class="control-label"></label>
-                <input asp-for="Local" class="form-control" />
-                <span asp-validation-for="Local" class="text-danger"></span>
-            </div>*@
+            <label asp-for="Local" class="control-label"></label>
+            <input asp-for="Local" class="form-control" />
+            <span asp-validation-for="Local" class="text-danger"></span>
+        </div>*@
             <div class="form-group">
                 <label asp-for="Local" class="control-label"></label>
                 <select asp-for="Local" class="form-control" required>
@@ -34,14 +34,26 @@
                 <span asp-validation-for="Local" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="DescricaoCurta" class="control-label"></label>
+                <label asp-for="DescricaoCurta" class="control-label">Descrição Curta</label>
                 <input asp-for="DescricaoCurta" class="form-control" />
                 <span asp-validation-for="DescricaoCurta" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label for="photoFile" class="control-label">Photo</label>
+                <label for="photoFile" class="control-label">Fotografia</label>
                 <input name="photoFile" type="file" class="form-control" />
             </div>
+            <div class="form-group">
+                <label for="photoFile2" class="control-label">Mapa</label>
+                <input name="photoFile2" type="file" class="form-control" />
+            </div>
+            @*<div class="form-group">
+            <label asp-for="Latitude" class="control-label"></label>
+            <input asp-for="Latitude" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label asp-for="Longitude" class="control-label"></label>
+            <input asp-for="Longitude" class="form-control" />
+        </div>*@
             <div class="form-group">
                 <input type="submit" value="Guardar" class="btn btn-primary" />
                 <p>@ViewBag.result</p>

@@ -104,7 +104,7 @@ namespace CapitalEuropeiaGuarda.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("PontoInteresseId,Nome,Local,DescricaoCurta")] PontoInteresse pontoInteresse, IFormFile photoFile)
+        public async Task<IActionResult> Create([Bind("PontoInteresseId,Nome,Local,DescricaoCurta")] PontoInteresse pontoInteresse, IFormFile photoFile, IFormFile photoFile2)
         {
             if (ModelState.IsValid)
             {
@@ -113,11 +113,36 @@ namespace CapitalEuropeiaGuarda.Controllers
                     using (var memFile = new MemoryStream())
                     {
                         photoFile.CopyTo(memFile);
+                        //photoFile2.CopyTo(memFile);
                         pontoInteresse.Photo = memFile.ToArray();
-                    }
+                        //pontoInteresse.Photo2 = memFile.ToArray();
+                    }   
                 }
 
-                _context.Add(pontoInteresse);
+             if (ModelState.IsValid)
+                {
+                 if (photoFile2 != null && photoFile2.Length > 0)
+                 {
+                     using (var memFile2 = new MemoryStream())
+                     {
+                       photoFile2.CopyTo(memFile2);
+                       //pontoInteresse.Photo = memFile2.ToArray();
+                       pontoInteresse.Photo2 = memFile2.ToArray();
+
+                     }
+
+                 }
+             }
+                    //else if (photoFile != null && photoFileMap.Length > 0)
+                    //{
+                    //    using (var memFile = new MemoryStream())
+                    //    {
+                    //        photoFileMap.CopyTo(memFile);
+                    //        pontoInteresse.Photo2 = memFile.ToArray();
+                    //    }
+                    //}
+
+                    _context.Add(pontoInteresse);
                 await _context.SaveChangesAsync();
                 //return RedirectToAction(nameof(Index));
 
