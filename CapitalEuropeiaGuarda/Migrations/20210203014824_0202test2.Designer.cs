@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CapitalEuropeiaGuarda.Migrations
 {
     [DbContext(typeof(CapitalEuropeiaGuardaContext))]
-    [Migration("20210202185357_aaa")]
-    partial class aaa
+    [Migration("20210203014824_0202test2")]
+    partial class _0202test2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -118,15 +118,9 @@ namespace CapitalEuropeiaGuarda.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<float>("Latitude")
-                        .HasColumnType("real");
-
                     b.Property<string>("Local")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<float>("Longitude")
-                        .HasColumnType("real");
 
                     b.Property<string>("Nome")
                         .IsRequired()
@@ -134,6 +128,9 @@ namespace CapitalEuropeiaGuarda.Migrations
                         .HasMaxLength(50);
 
                     b.Property<byte[]>("Photo")
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<byte[]>("Photo2")
                         .HasColumnType("varbinary(max)");
 
                     b.HasKey("PontoInteresseId");

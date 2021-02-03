@@ -116,14 +116,8 @@ namespace CapitalEuropeiaGuarda.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Latitude")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Local")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Longitude")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Nome")
@@ -132,6 +126,9 @@ namespace CapitalEuropeiaGuarda.Migrations
                         .HasMaxLength(50);
 
                     b.Property<byte[]>("Photo")
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<byte[]>("Photo2")
                         .HasColumnType("varbinary(max)");
 
                     b.HasKey("PontoInteresseId");

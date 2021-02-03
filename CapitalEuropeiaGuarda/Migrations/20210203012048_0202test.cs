@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace CapitalEuropeiaGuarda.Migrations
 {
-    public partial class aaa : Migration
+    public partial class _0202test : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -66,8 +66,7 @@ namespace CapitalEuropeiaGuarda.Migrations
                     Local = table.Column<string>(nullable: false),
                     DescricaoCurta = table.Column<string>(nullable: false),
                     Photo = table.Column<byte[]>(nullable: true),
-                    Latitude = table.Column<float>(nullable: false),
-                    Longitude = table.Column<float>(nullable: false)
+                    Photo2 = table.Column<byte[]>(nullable: true)
                 },
                 constraints: table =>
                 {

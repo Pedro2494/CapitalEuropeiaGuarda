@@ -29,12 +29,14 @@ namespace CapitalEuropeiaGuarda.Controllers
                                    Nome = b.Nome,
                                    DescricaoCurta = b.DescricaoCurta,
                                    Local = b.Local,
-                                   Photo = b.Photo
+                                   Photo = b.Photo,
+                                   Photo2 = b.Photo2
                                    //Latitude = b.Latitude,
                                    //Longitude = b.Longitude
 
                                }).ToList();
             ViewBag.dadosPontos = dadosPontos;
+
 
             return View("ViewPontos");
         }

@@ -22,9 +22,11 @@ namespace CapitalEuropeiaGuarda.Models
 
         public byte[] Photo { get; set; }
 
-        public string Latitude { get; set; }
+        public byte[] Photo2 { get; set; }
 
-        public string Longitude { get; set; }
+        //public string Latitude { get; set; }
+
+        //public string Longitude { get; set; }
 
         //public class PontoInteresseList
         //{
