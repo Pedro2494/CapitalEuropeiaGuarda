@@ -115,7 +115,7 @@ namespace CapitalEuropeiaGuarda.Controllers
             if (!String.IsNullOrEmpty(searchString))
             {
                 hoteis = hoteis.Where(s => s.Nome.Contains(searchString)
-                                || s.DescricaoCurta.Contains(searchString));
+                                || s.DescricaoCurta.Contains(searchString) || s.Local.Contains(searchString));
             }
 
             switch (sortOrder)

@@ -24,11 +24,11 @@ namespace CapitalEuropeiaGuarda.Models
         [Required(ErrorMessage = "Introduza o numero de telemovel")]
         public string Telemovel { get; set; }
 
-        [Required(ErrorMessage = "Introduza uma password")]
+        
         [DataType(DataType.Password)]
         public string Password { get; set; }
 
-        [Required(ErrorMessage = "Confirme a password")]
+        
         [DataType(DataType.Password)]
         public string ConfirmarPassword { get; set; }
 

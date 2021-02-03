@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CapitalEuropeiaGuarda.Migrations
 {
     [DbContext(typeof(CapitalEuropeiaGuardaContext))]
-    [Migration("20210203155846_123")]
-    partial class _123
+    [Migration("20210203225627_migra4")]
+    partial class migra4
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -206,7 +206,6 @@ namespace CapitalEuropeiaGuarda.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("ConfirmarPassword")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
@@ -221,7 +220,6 @@ namespace CapitalEuropeiaGuarda.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Password")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Telemovel")

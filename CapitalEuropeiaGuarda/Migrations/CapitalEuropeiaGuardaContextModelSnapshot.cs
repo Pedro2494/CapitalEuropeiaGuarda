@@ -204,7 +204,6 @@ namespace CapitalEuropeiaGuarda.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("ConfirmarPassword")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
@@ -219,7 +218,6 @@ namespace CapitalEuropeiaGuarda.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Password")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Telemovel")
