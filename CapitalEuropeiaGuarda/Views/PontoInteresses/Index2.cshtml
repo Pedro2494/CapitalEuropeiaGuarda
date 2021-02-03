@@ -1,0 +1,103 @@
+﻿@model PaginatedList<CapitalEuropeiaGuarda.Models.PontoInteresse>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+
+<h1>Index</h1>
+
+
+<br />
+<form asp-action="Index2" method="get">
+    <div class="form-actions">
+        <p>
+            Pesquisar: <input type="text" name="SearchString" value="@ViewData["CurrentFilter"]" />
+            <input type="submit" value="Pesquisar" class="btn btn-success btn-sm" /> |
+        </p>
+    </div>
+</form>
+
+<table class="table">
+    <thead>
+        <tr style="background-color:#CADAFF">
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["NomeSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Nome</a>
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["LocalSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Local</a>
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["DescricaoCurtaSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Descrição curta</a>
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["Photo"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Photo</a>
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr style="background-color:#DFE9FF">
+            <td>
+                @Html.DisplayFor(modelItem => item.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Local)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DescricaoCurta)
+            </td>
+            <td>
+                @if (item.Photo != null)
+                {
+                    <img style="height: 300px; width:300px;" class="img-responsive full-width" src="data:image/jpeg;base64,@Convert.ToBase64String(item.Photo)" />
+                }
+                else
+                {
+                    <img style="height: 300px; width:300px;" class="img-responsive full-width" src="~/images/notfound.gif" />
+                }
+            </td>
+            <td>
+                @if (item.Photo2 != null)
+                {
+                    <img style="height: 300px; width:300px;" class="img-responsive full-width" src="data:image/jpeg;base64,@Convert.ToBase64String(item.Photo2)" />
+                }
+                else
+                {
+                    <img style="height: 300px; width:300px;" class="img-responsive full-width" src="~/images/notfound.gif" />
+                }
+            </td>
+
+
+            @*<td>
+                <a asp-action="Edit" asp-route-id="@item.PontoInteresseId">Editar</a> |
+                <a asp-action="Details" asp-route-id="@item.PontoInteresseId">Detalhes</a> |
+                <a asp-action="Delete" asp-route-id="@item.PontoInteresseId">Eliminar</a>
+            </td>*@
+        </tr>
+        }
+    </tbody>
+</table>
+<br />
+@{
+    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+}
+
+<a asp-action="Index2"
+   asp-route-sortOrder="@ViewData["CurrentSort"]"
+   asp-route-pageNumber="@(Model.PageIndex - 1)"
+   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+   class="btn btn-default @prevDisabled">
+    Anterior
+</a>
+<a asp-action="Index2"
+   asp-route-sortOrder="@ViewData["CurrentSort"]"
+   asp-route-pageNumber="@(Model.PageIndex + 1)"
+   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+   class="btn btn-default @nextDisabled">
+    Seguinte
+</a>
