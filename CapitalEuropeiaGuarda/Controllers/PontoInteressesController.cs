@@ -75,6 +75,58 @@ namespace CapitalEuropeiaGuarda.Controllers
 
         }
 
+        public async Task<IActionResult> Index2(string sortOrder,
+        string currentFilter,
+        string searchString,
+        int? pageNumber)
+        {
+            ViewData["CurrentSort"] = sortOrder;
+
+            ViewData["NomeSortParm"] = String.IsNullOrEmpty(sortOrder) ? "nome_desc" : "";
+            ViewData["LocalSortParm"] = String.IsNullOrEmpty(sortOrder) ? "local_desc" : "";
+            ViewData["DescricaoCurtaSortParm"] = String.IsNullOrEmpty(sortOrder) ? "descricaocurta_desc" : "";
+            ViewData["Photo"] = String.IsNullOrEmpty(sortOrder) ? "photo" : "";
+            ViewData["Photo2"] = String.IsNullOrEmpty(sortOrder) ? "photo2" : "";
+
+
+            ViewData["CurrentFilter"] = searchString;
+
+            if (searchString != null)
+            {
+                pageNumber = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            var pontointeresse = from s in _context.PontoInteresse
+                                 select s;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                pontointeresse = pontointeresse.Where(s => s.Nome.Contains(searchString)
+                                || s.DescricaoCurta.Contains(searchString));
+            }
+
+            switch (sortOrder)
+            {
+                case "nome_desc":
+                    pontointeresse = pontointeresse.OrderByDescending(s => s.Nome);
+                    break;
+                case "descricaocurta_desc":
+                    pontointeresse = pontointeresse.OrderByDescending(s => s.DescricaoCurta);
+                    break;
+                case "local_desc":
+                    pontointeresse = pontointeresse.OrderByDescending(s => s.Local);
+                    break;
+            }
+            int pageSize = 3;
+            return View(await PaginatedList<PontoInteresse>.CreateAsync(pontointeresse.AsNoTracking(), pageNumber ?? 1, pageSize));
+
+
+        }
+
         // GET: PontoInteresses/Details/5
         public async Task<IActionResult> Details(int? id)
         {
